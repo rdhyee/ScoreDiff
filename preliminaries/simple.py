@@ -9,6 +9,7 @@ score2=argv[2]
 parsed1=corpus.parse(score1)
 parsed2=corpus.parse(score2)
 
+print "Analyzing "+score1+" and "+score2
 print "Checking to see if the scores are well-formed..."
 
 if(parsed1.isWellFormedNotation() and parsed2.isWellFormedNotation()):

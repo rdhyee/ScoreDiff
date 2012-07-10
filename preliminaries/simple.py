@@ -18,7 +18,7 @@ else:
 
 print "Comparing Key Signatures..."
 
-if (parsed1.parts[0].measure(0).keySignature.sharps==parsed2.parts[0].measure(0).keySignature.sharps):
+if (parsed1.parts[0].measure(0).keySignature.pitchAndMode==parsed2.parts[0].measure(0).keySignature.pitchAndMode):
 	print "Both scores start in the same key signature"
 else:
 	print "The two scores do not start in the same key"

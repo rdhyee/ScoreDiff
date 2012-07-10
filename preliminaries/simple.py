@@ -19,9 +19,9 @@ else:
 print "Comparing Key Signatures..."
 
 if (parsed1.parts[0].measure(0).keySignature.sharps==parsed2.parts[0].measure(0).keySignature.sharps):
-	print "Both scores have the same key signature"
+	print "Both scores start in the same key signature"
 else:
-	print "The two scores are not in the same key"
+	print "The two scores do not start in the same key"
 
 print "Comparing Time Signatures..."
 

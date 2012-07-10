@@ -1,0 +1,42 @@
+Analyzing bwv66.6.mxl and test.mxl
+Checking to see if the scores are well-formed...
+Both scores are well formed
+Comparing Key Signatures...
+Both scores start in the same key signature
+Comparing Time Signatures...
+The scores have the same time signature (at least for first measure)
+Comparing pitches...
+Found a pitch that was not the same
+Found a pitch that was not the same
+Found a pitch that was not the same
+Found a pitch that was not the same
+Finished comparing scores
+Goodbye!
+Analyzing bwv66.6.mxl and different_key.mxl
+Checking to see if the scores are well-formed...
+Both scores are well formed
+Comparing Key Signatures...
+The two scores do not start in the same key
+Comparing Time Signatures...
+The scores have the same time signature (at least for first measure)
+Comparing pitches...
+Found a pitch that was not the same
+Found a pitch that was not the same
+Found a pitch that was not the same
+Found a pitch that was not the same
+Finished comparing scores
+Goodbye!
+Analyzing bwv66.6.mxl and different_time.mxl
+Checking to see if the scores are well-formed...
+Both scores are well formed
+Comparing Key Signatures...
+Both scores start in the same key signature
+Comparing Time Signatures...
+The scores do not start in the same time signature
+Comparing pitches...
+Found a pitch that was not the same
+Found a pitch that was not the same
+Found a pitch that was not the same
+Found a pitch that was not the same
+Finished comparing scores
+Goodbye!

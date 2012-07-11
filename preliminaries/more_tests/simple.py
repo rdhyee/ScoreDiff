@@ -56,5 +56,5 @@ for index in range(0,len(notes1)):
 if(not test):
 	print "The stem directions are the same"
 
-print "Finished comparinig scores"
+print "Finished comparing scores"
 print "Goodbye!"

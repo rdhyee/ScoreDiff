@@ -20,9 +20,6 @@ def test1(score1, score2):
 	   Both scores start in the same key signature
 	   The scores do not start in the same time signature
 	   
-
-
-
 	"""
 	
 	us=environment.UserSettings()

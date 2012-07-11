@@ -29,16 +29,17 @@ for index in range(0,len(notes1)):
 	if(notes1[index].pitch.accidental is None and not (notes2[index].pitch.accidental is None)):
 		print "found an accidental in one version that is not in the other version"
 		test=True
-		continue	
-	if(notes2[index].pitch.accidental is None and not(notes1[index].pitch.accidental is None)):
+		
+       
+	elif(notes2[index].pitch.accidental is None and not(notes1[index].pitch.accidental is None)):
 		print "found an accidental in one version that is not in the other version"
 		test=True
-		continue
+		
 	
-	if(notes1[index].pitch.accidental is None and notes2[index].pitch.accidental is None):
-		continue
+	elif(notes1[index].pitch.accidental is None and notes2[index].pitch.accidental is None):
+		continue	
 	
-	if(notes1[index].pitch.accidental.fullName != notes2[index].pitch.accidental.fullName):
+	elif(notes1[index].pitch.accidental.fullName != notes2[index].pitch.accidental.fullName):
 		print "found an accidental in one version that is not in the other version"
 		test=True
 

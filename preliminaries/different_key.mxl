@@ -76,9 +76,9 @@
       </attributes>
       <note>
         <pitch>
-          <step>D</step>
+          <step>C</step>
           <alter>1</alter>
-          <octave>3</octave>
+          <octave>5</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
@@ -88,8 +88,8 @@
       </note>
       <note>
         <pitch>
-          <step>F</step>
-          <octave>2</octave>
+          <step>B</step>
+          <octave>4</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
@@ -104,8 +104,8 @@
       </attributes>
       <note>
         <pitch>
-          <step>G</step>
-          <octave>6</octave>
+          <step>A</step>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
@@ -114,8 +114,8 @@
       </note>
       <note>
         <pitch>
-          <step>A</step>
-          <octave>5</octave>
+          <step>B</step>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>

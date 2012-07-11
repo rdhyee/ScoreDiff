@@ -1,30 +1,26 @@
 from music21 import *
 from sys import argv
 
-#doctests
-def test1(score1, score2):
+
+us=environment.UserSettings()
+us['localCorpusPath']='.'
+
+
+#compares the starting key signature
+#of score1 against the starting
+#time signature of score2
+def check_key(score1, score2):
 	"""
-	   >>> test1('bwv66.6.mxl', 'different_pitches.mxl')
-	   Both scores start in the same key signature
-	   The scores have the same time signature
-	   Found a pitch that was not the same
-	   Found a pitch that was not the same
-	   Found a pitch that was not the same
-	   Found a pitch that was not the same
-		
-	   >>> test1('bwv66.6.mxl','different_key.mxl')
+	   >>> check_key('bwv66.6.mxl','different_key.mxl')
 	   The two scores do not start in the same key
-	   The scores have the same time signature
 
-
-	   >>> test1('bwv66.6.mxl', 'different_time.mxl')
+	   >>> check_key('bwv66.6.mxl','different_pitches.mxl')
 	   Both scores start in the same key signature
-	   The scores do not start in the same time signature
-	   
+
+	   >>> check_key('bwv66.6.mxl','different_time.mxl')
+	   Both scores start in the same key signature
 	"""
 	
-	us=environment.UserSettings()
-	us['localCorpusPath']='.'
 
 	parsed1=corpus.parse(score1)
 	parsed2=corpus.parse(score2)
@@ -37,12 +33,46 @@ def test1(score1, score2):
 	else:
 		print "The two scores do not start in the same key"
 
+#compares the starting time signature of score1 against the
+#starting time signature of score2
+def check_time(score1, score2):
+	
+	"""
+	   >>> check_time('bwv66.6.mxl','different_time.mxl')
+	   The scores do not start in the same time signature
+	   
+	   >>> check_time('bwv66.6.mxl','different_pitches.mxl')
+	   The scores have the same time signature
+
+	   >>> check_time('bwv66.6.mxl','different_key.mxl')
+	   The scores have the same time signature
+
+	"""
+	parsed1=corpus.parse(score1)
+	parsed2=corpus.parse(score2)
 	#again, only testing the first part and first measure
 	if (parsed1.parts[0].measure(0).timeSignature.numerator==parsed2.parts[0].measure(0).timeSignature.numerator and parsed1.parts[0].measure(0).timeSignature.denominator==parsed2.parts[0].measure(0).timeSignature.denominator):
 		print "The scores have the same time signature"
 
 	else:
 		print "The scores do not start in the same time signature"
+
+#compares the pitches in score1 against the pitches in score2
+def check_pitches(score1, score2):
+
+	"""
+	   >>> check_pitches('bwv66.6.mxl','different_pitches.mxl')
+	   Found a pitch that was not the same
+	   Found a pitch that was not the same
+	   Found a pitch that was not the same
+	   Found a pitch that was not the same
+	   
+	   >>> check_pitches('bwv66.6.mxl','different_key.mxl')
+
+	   >>> check_pitches('bwv66.6.mxl','different_time.mxl')
+	"""
+	parsed1=corpus.parse(score1)
+	parsed2=corpus.parse(score2)
 
 	parsed1_pitches=parsed1.parts[0].pitches
 	parsed2_pitches=parsed2.parts[0].pitches

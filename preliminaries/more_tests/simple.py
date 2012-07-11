@@ -1,5 +1,4 @@
 from music21 import *
-from sys import argv
 
 #Set the local corpus path to the current directory
 us=environment.UserSettings()

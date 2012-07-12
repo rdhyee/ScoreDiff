@@ -73,7 +73,7 @@
           <sign>G</sign>
           <line>2</line>
         </clef>
-      </attributes>
+	</attributes>
       <note>
         <pitch>
           <step>C</step>

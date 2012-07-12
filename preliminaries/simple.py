@@ -1,6 +1,4 @@
 from music21 import *
-from sys import argv
-
 
 us=environment.UserSettings()
 us['localCorpusPath']='./test_cases'
@@ -221,8 +219,6 @@ def check_ornaments(score1, score2):
 	if(not test):
 		print "The ornaments are the same"
 
-#compare the dynamics in score1 against those in score2
-def check_dynamics(score1, score2):
 
 
 if __name__=='__main__':

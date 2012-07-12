@@ -62,25 +62,22 @@ def check_pitches(score1, score2):
 
 	"""
 	   >>> check_pitches('bwv66.6.mxl','different_pitches.mxl')
-	   Found a pitch that was not the same
-	   Found a pitch that was not the same
-	   Found a pitch that was not the same
-	   Found a pitch that was not the same
-	   
+	   False
+
 	   >>> check_pitches('bwv66.6.mxl','different_key.mxl')
+	   True
 
 	   >>> check_pitches('bwv66.6.mxl','different_time.mxl')
+	   True
+
 	"""
 	parsed1=corpus.parse(score1)
 	parsed2=corpus.parse(score2)
 
 	parsed1_pitches=parsed1.parts[0].pitches
 	parsed2_pitches=parsed2.parts[0].pitches
-	#this will check the entire piece, but only for part one
-	for index, pitch in enumerate(parsed1_pitches):
-		if not (parsed2_pitches[index]==pitch):
-			print "Found a pitch that was not the same"
-
+	
+	return parsed1_pitches==parsed2_pitches
 
 
 

@@ -6,3 +6,9 @@ at: [scriabin](http://kern.ccarh.org/cgi-bin/ksbrowse?type=collection&l=/users/c
 
 The resulting Scriabin .mus files are particularly hideous, so they present
 a good opportunity to see how much the finished tool can really pick up on.
+
+There are several options when reading .mus files, but finale is probably the
+easiest choice.  You can download finale here: [finale](http://www.finalemusic.com/notepad/default.aspx "finale")
+
+Unfortunately, it doesn't look like the website above has a linux version, but
+I'm sure linux user's can find a creative solution.

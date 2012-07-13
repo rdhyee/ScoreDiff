@@ -180,6 +180,18 @@ def have_same_ornaments(score1, score2):
 	   >>> have_same_ornaments('bwv66.6.mxl', 'bwv66.6.mxl')
 	   True
 
+	   >>> have_same_ornaments('different_ornaments.mxl', 'different_ornaments2.mxl')
+	   False
+
+	   >>> have_same_ornaments('different_ornaments.mxl', 'different_ornaments3.mxl')
+	   False
+
+	   >>> have_same_ornaments('bwv66.6.mxl', 'different_ornaments2.mxl')
+	   False
+
+	   >>> have_same_ornaments('bwv66.6.mxl', 'different_ornaments3.mxl')
+	   False
+
 	"""
 
 	parsed1=corpus.parse(score1)
@@ -244,6 +256,7 @@ def have_same_spanners(score1, score2):
 
 	return spanner1==spanner2
 
+#compares the articulations from score1 against those in score2
 def have_same_articulations(score1, score2):
 
 	"""
@@ -274,6 +287,7 @@ def have_same_articulations(score1, score2):
 	return False
 
 
+#Run the doctests
 if __name__=='__main__':
 	import doctest
 	doctest.testmod()

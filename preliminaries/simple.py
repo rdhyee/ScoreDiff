@@ -178,15 +178,15 @@ def check_stems(score1, score2):
 	if(not test):
 		print "The stem directions are the same"
 
-#compare the ornaments in score1 against those in score2
-def check_ornaments(score1, score2):
-
+#compare the expressions in score1 against those in score2.
+def check_expressions(score1, score2):
+	
 	"""
-	   >>> check_ornaments('bwv66.6.mxl','different_ornaments.mxl')
+	   >>> check_expressions('bwv66.6.mxl','different_ornaments.mxl')
 	   different ornaments
 	   different ornaments
 
-	   >>> check_ornaments('bwv66.6.mxl', 'bwv66.6.mxl')
+	   >>> check_expressions('bwv66.6.mxl', 'bwv66.6.mxl')
 	   The ornaments are the same
 
 	"""
@@ -220,6 +220,34 @@ def check_ornaments(score1, score2):
 		print "The ornaments are the same"
 
 
+#This function was originally intended to check for
+#phrasing only, but that turned out to be a somewhat
+#awkward task, so now the function compares all spanners
+#including slurs, glissandos, etc.  
+#Take a look at: http://mit.edu/music21/doc/html/moduleSpanner.html?highlight=spanner
+#to read more about spanners
+def check_spanners(score1, score2):
+	
+
+	"""
+	   >>> check_spanners('bwv66.6.mxl','different_phrasing.mxl')
+	   False
+
+	   >>> check_spanners('bwv66.6.mxl', 'different_ornaments.mxl')
+	   False
+
+	   >>> check_spanners('bwv66.6.mxl', 'different_dynamics.mxl')
+	   True
+
+	"""
+
+	parsed1=corpus.parse(score1)
+	parsed2=corpus.parse(score2)
+
+	spanner1=parsed1.parts[0].measure(0).notes[0].getSpannerSites()
+	spanner2=parsed2.parts[0].measure(0).notes[0].getSpannerSites()
+
+	return spanner1==spanner2
 
 if __name__=='__main__':
 	import doctest

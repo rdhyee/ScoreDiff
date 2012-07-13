@@ -280,15 +280,14 @@ def check_articulations(score1, score2):
 	notes1=parsed1.parts[0].measure(0).notes
 	notes2=parsed2.parts[0].measure(0).notes
 
-	different_articulations=False
 
 	for index, item in enumerate(notes1):
 
 		if(item.articulations!=notes2[index].articulations):
-			different_articulations=True
-
-	return different_articulations
-
+		
+			return True
+	
+	return False
 
 if __name__=='__main__':
 	import doctest

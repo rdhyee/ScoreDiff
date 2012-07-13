@@ -4,9 +4,9 @@ us=environment.UserSettings()
 us['localCorpusPath']='./test_cases'
 
 
-#compares the starting key signature
-#of score1 against the starting
-#key signature of score2
+"""compares the starting key signature
+of score1 against the starting
+key signature of score2"""
 def have_same_key_signature(score1, score2):
 	
 	"""
@@ -241,12 +241,12 @@ def have_same_ornaments(score1, score2):
 
 	return True
 
-#This function was originally intended to check for
-#phrasing only, but that turned out to be a somewhat
-#awkward task, so for now the function compares all spanners
-#including slurs, glissandos, etc.  
-#Take a look at: http://mit.edu/music21/doc/html/moduleSpanner.html?highlight=spanner
-#to read more about spanners
+"""This function was originally intended to check for
+phrasing only, but that turned out to be a somewhat
+awkward task, so for now the function compares all spanners
+including slurs, glissandos, etc.  
+Take a look at: http://mit.edu/music21/doc/html/moduleSpanner.html?highlight=spanner
+to read more about spanners"""
 def have_same_spanners(score1, score2):
 	
 	"""

@@ -11,4 +11,4 @@ There are several options when reading .mus files, but finale is probably the
 easiest choice.  You can download finale here: [finale](http://www.finalemusic.com/notepad/default.aspx "finale")
 
 Unfortunately, it doesn't look like the website above has a linux version, but
-I'm sure linux user's can find a creative solution.
+I'm sure linux users can find a creative solution.

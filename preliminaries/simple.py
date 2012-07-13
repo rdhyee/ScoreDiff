@@ -1,9 +1,8 @@
-from music21 import environment
+import music21.environment
 from music21.corpus import base
 from os.path import abspath
 
-us=environment.UserSettings()
-us['localCorpusPath']= abspath('test_cases')
+music21.environment.set('localCorpusPath', abspath('test_cases'))
 
 """compares the starting key signature
 of score1 against the starting

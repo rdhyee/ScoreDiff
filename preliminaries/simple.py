@@ -1,4 +1,5 @@
-from music21 import environment, corpus
+from music21 import environment
+from music21.corpus import base
 from os.path import abspath
 
 us=environment.UserSettings()
@@ -21,8 +22,8 @@ def have_same_key_signature(score1, score2):
 
 	"""
 	
-	parsed1=corpus.parse(score1)
-	parsed2=corpus.parse(score2)
+	parsed1=base.parse(score1)
+	parsed2=base.parse(score2)
 
 	#for now, I'm only testing the first part and the first measure
 	if (parsed1.parts[0].measure(0).keySignature.pitchAndMode==
@@ -49,8 +50,8 @@ def have_same_time_signature(score1, score2):
 	   True
 
 	"""
-	parsed1=corpus.parse(score1)
-	parsed2=corpus.parse(score2)
+	parsed1= base.parse(score1)
+	parsed2= base.parse(score2)
 
 	#again, only testing the first part and first measure
 	if (parsed1.parts[0].measure(0).timeSignature.numerator==parsed2.parts[0].measure(0).timeSignature.numerator 
@@ -76,8 +77,8 @@ def have_same_pitches(score1, score2):
 	   True
 
 	"""
-	parsed1=corpus.parse(score1)
-	parsed2=corpus.parse(score2)
+	parsed1= base.parse(score1)
+	parsed2= base.parse(score2)
 
 	parsed1_pitches=parsed1.parts[0].pitches
 	parsed2_pitches=parsed2.parts[0].pitches
@@ -99,8 +100,8 @@ def have_same_clef_markings(score1, score2):
 
 	"""
 	
-	parsed1=corpus.parse(score1)
-	parsed2=corpus.parse(score2)
+	parsed1= base.parse(score1)
+	parsed2= base.parse(score2)
 
 	if(parsed1.parts[0].measure(0).clef.sign==parsed2.parts[0].measure(0).clef.sign):
 
@@ -124,8 +125,8 @@ def have_same_accidentals(score1, score2):
            True
 
 	"""
-	parsed1=corpus.parse(score1)
-	parsed2=corpus.parse(score2)
+	parsed1= base.parse(score1)
+	parsed2= base.parse(score2)
 	
 	notes1=parsed1.parts[0].measure(0).notes
 	notes2=parsed2.parts[0].measure(0).notes
@@ -166,8 +167,8 @@ def have_same_stem_directions(score1, score2):
 
 	"""
 
-	parsed1= corpus.parse(score1)
-	parsed2= corpus.parse(score2)
+	parsed1= base.parse(score1)
+	parsed2= base.parse(score2)
 
 	notes1= parsed1.parts[0].measure(0).notes
 	notes2= parsed2.parts[0].measure(0).notes
@@ -204,8 +205,8 @@ def have_same_ornaments(score1, score2):
 
 	"""
 
-	parsed1=corpus.parse(score1)
-	parsed2=corpus.parse(score2)
+	parsed1= base.parse(score1)
+	parsed2= base.parse(score2)
 
 	notes1=parsed1.parts[0].measure(0).notes
 	notes2=parsed2.parts[0].measure(0).notes
@@ -261,8 +262,8 @@ def have_same_spanners(score1, score2):
 
 	"""
 
-	parsed1=corpus.parse(score1)
-	parsed2=corpus.parse(score2)
+	parsed1= base.parse(score1)
+	parsed2= base.parse(score2)
 
 	spanner1=parsed1.parts[0].measure(0).notes[0].getSpannerSites()
 	spanner2=parsed2.parts[0].measure(0).notes[0].getSpannerSites()
@@ -284,8 +285,8 @@ def have_same_articulations(score1, score2):
 
 	"""
 
-	parsed1=corpus.parse(score1)
-	parsed2=corpus.parse(score2)
+	parsed1= base.parse(score1)
+	parsed2= base.parse(score2)
 
 	notes1=parsed1.parts[0].measure(0).notes
 	notes2=parsed2.parts[0].measure(0).notes

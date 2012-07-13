@@ -178,15 +178,15 @@ def check_stems(score1, score2):
 	if(not test):
 		print "The stem directions are the same"
 
-#compare the expressions in score1 against those in score2.
-def check_expressions(score1, score2):
+#compare the ornaments in score1 against those in score2
+def check_ornaments(score1, score2):
 	
 	"""
-	   >>> check_expressions('bwv66.6.mxl','different_ornaments.mxl')
+	   >>> check_ornaments('bwv66.6.mxl','different_ornaments.mxl')
 	   different ornaments
 	   different ornaments
 
-	   >>> check_expressions('bwv66.6.mxl', 'bwv66.6.mxl')
+	   >>> check_ornaments('bwv66.6.mxl', 'bwv66.6.mxl')
 	   The ornaments are the same
 
 	"""
@@ -198,9 +198,10 @@ def check_expressions(score1, score2):
 	notes2=parsed2.parts[0].measure(0).notes
 
 	test=False
-
+	o='Ornament'
 	for index, item in enumerate(notes1):
-
+		
+		
 		if (item.expressions==[] and notes2[index].expressions!=[] 
 				or notes2[index].expressions==[] and item.expressions!=[]):
 			
@@ -211,18 +212,23 @@ def check_expressions(score1, score2):
 
 			continue
 		
-		elif (item.expressions[0].classes!=notes2[index].expressions[0].classes):
-			
+		
+		elif(o in item.expressions[0].classes and not o in notes2[index].expressions[0].classes or o in notes2[index].expressions[0].classes and not o in item.expressions[0].classes):
+				
 			print "different ornaments"
 			test=True
-	
+		elif(item.expressions[0].classes[index-1]!=item.expressions[0].classes[index-1]):
+
+			print "different ornaments"
+			test=True
+			
 	if(not test):
 		print "The ornaments are the same"
 
 
 #This function was originally intended to check for
 #phrasing only, but that turned out to be a somewhat
-#awkward task, so now the function compares all spanners
+#awkward task, so for now the function compares all spanners
 #including slurs, glissandos, etc.  
 #Take a look at: http://mit.edu/music21/doc/html/moduleSpanner.html?highlight=spanner
 #to read more about spanners

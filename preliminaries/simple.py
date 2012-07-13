@@ -1,8 +1,8 @@
-from music21 import *
+from music21 import environment, corpus
+from os.path import abspath
 
 us=environment.UserSettings()
-us['localCorpusPath']='./test_cases'
-
+us['localCorpusPath']= abspath('test_cases')
 
 """compares the starting key signature
 of score1 against the starting

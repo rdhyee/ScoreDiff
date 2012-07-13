@@ -8,6 +8,7 @@ us['localCorpusPath']='./test_cases'
 #of score1 against the starting
 #time signature of score2
 def have_same_key_signature(score1, score2):
+	
 	"""
 	   >>> have_same_key_signature('bwv66.6.mxl','different_key.mxl')
 	   False
@@ -20,16 +21,17 @@ def have_same_key_signature(score1, score2):
 
 	"""
 	
-
 	parsed1=corpus.parse(score1)
 	parsed2=corpus.parse(score2)
 
-
-
 	#for now, I'm only testing the first part and the first measure
-	if (parsed1.parts[0].measure(0).keySignature.pitchAndMode==parsed2.parts[0].measure(0).keySignature.pitchAndMode):
+	if (parsed1.parts[0].measure(0).keySignature.pitchAndMode==
+			parsed2.parts[0].measure(0).keySignature.pitchAndMode):
+		
 		return True
+	
 	else:
+		
 		return False	
 
 #compares the starting time signature of score1 against the
@@ -49,11 +51,14 @@ def have_same_time_signature(score1, score2):
 	"""
 	parsed1=corpus.parse(score1)
 	parsed2=corpus.parse(score2)
+
 	#again, only testing the first part and first measure
 	if (parsed1.parts[0].measure(0).timeSignature.numerator==parsed2.parts[0].measure(0).timeSignature.numerator and parsed1.parts[0].measure(0).timeSignature.denominator==parsed2.parts[0].measure(0).timeSignature.denominator):
+		
 		return True
 
 	else:
+		
 		return False
 
 #compares the pitches in score1 against the pitches in score2
@@ -91,17 +96,17 @@ def have_same_clef_markings(score1, score2):
 	   >>> have_same_clef_markings('bwv66.6.mxl','different_stems.mxl')
 	   True
 
-
 	"""
 	
 	parsed1=corpus.parse(score1)
 	parsed2=corpus.parse(score2)
 
-
-
 	if(parsed1.parts[0].measure(0).clef.sign==parsed2.parts[0].measure(0).clef.sign):
+
 		return True
+	
 	else:
+		
 		return False
 
 #compares the accidentals in score1 against those in score2
@@ -124,22 +129,23 @@ def have_same_accidentals(score1, score2):
 	notes1=parsed1.parts[0].measure(0).notes
 	notes2=parsed2.parts[0].measure(0).notes
 
-
-
 	for index in range(0,len(notes1)):
 	
 		if(notes1[index].pitch.accidental is None and not (notes2[index].pitch.accidental is None)):
+
 			return False	
 		
-       
-		elif(notes2[index].pitch.accidental is None and not(notes1[index].pitch.accidental is None)):
+       		elif(notes2[index].pitch.accidental is None and not(notes1[index].pitch.accidental is None)):
+
 			return False	
 		
 	
 		elif(notes1[index].pitch.accidental is None and notes2[index].pitch.accidental is None):
+		
 			continue	
 	
 		elif(notes1[index].pitch.accidental.fullName != notes2[index].pitch.accidental.fullName):
+		
 			return False	
 
 	return True
@@ -166,8 +172,11 @@ def have_same_stem_directions(score1, score2):
 	notes2= parsed2.parts[0].measure(0).notes
 
 	for index in range(0,len(notes1)):
+
 		if(notes1[index].stemDirection != notes2[index].stemDirection):
+		
 			return False
+
 	return True
 
 #compare the ornaments in score1 against those in score2
@@ -201,6 +210,7 @@ def have_same_ornaments(score1, score2):
 	notes2=parsed2.parts[0].measure(0).notes
 	
 	o='Ornament'
+
 	for index, item in enumerate(notes1):
 		
 		
@@ -214,14 +224,17 @@ def have_same_ornaments(score1, score2):
 			continue
 		
 		
-		elif(o in item.expressions[0].classes and not o in notes2[index].expressions[0].classes or o in notes2[index].expressions[0].classes and not o in item.expressions[0].classes):
+		elif(o in item.expressions[0].classes and not o in notes2[index].expressions[0].classes or 
+				o in notes2[index].expressions[0].classes and not o in item.expressions[0].classes):
+
 			return False	
 				
 		elif(not o in item.expressions[0].classes and not o in notes2[index].expressions[0].classes):
 			
 			continue
 
-		elif(item.expressions[0].classes[item.expressions[0].classes.index(o)-1]!=notes2[index].expressions[0].classes[notes2[index].expressions[0].classes.index(o)-1]):
+		elif(item.expressions[0].classes[item.expressions[0].classes.index(o)-1]
+				!=notes2[index].expressions[0].classes[notes2[index].expressions[0].classes.index(o)-1]):
 
 			return False
 
@@ -235,7 +248,6 @@ def have_same_ornaments(score1, score2):
 #to read more about spanners
 def have_same_spanners(score1, score2):
 	
-
 	"""
 	   >>> have_same_spanners('bwv66.6.mxl','different_phrasing.mxl')
 	   False

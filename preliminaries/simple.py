@@ -274,13 +274,13 @@ def have_same_articulations(score1, score2):
 
 	"""
 	   >>> have_same_articulations('bwv66.6.mxl','different_articulations.mxl')
-	   True
+	   False
 
 	   >>> have_same_articulations('bwv66.6.mxl', 'different_phrasing.mxl')
-	   False
+	   True
 
 	   >>> have_same_articulations('bwv66.6.mxl', 'different_ornaments.mxl')
-	   False
+	   True
 
 	"""
 
@@ -295,9 +295,9 @@ def have_same_articulations(score1, score2):
 
 		if(item.articulations!=notes2[index].articulations):
 		
-			return True
+			return False
 	
-	return False
+	return True
 
 
 #Run the doctests

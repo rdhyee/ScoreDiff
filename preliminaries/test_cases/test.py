@@ -9,5 +9,4 @@ us['localCorpusPath']='.'
 
 s=corpus.parse(score)
 s.show()
-exit()
 

@@ -6,7 +6,7 @@ us['localCorpusPath']='./test_cases'
 
 #compares the starting key signature
 #of score1 against the starting
-#time signature of score2
+#key signature of score2
 def have_same_key_signature(score1, score2):
 	
 	"""

@@ -217,7 +217,12 @@ def check_ornaments(score1, score2):
 				
 			print "different ornaments"
 			test=True
-		elif(item.expressions[0].classes[index-1]!=item.expressions[0].classes[index-1]):
+		
+		elif(not o in item.expressions[0].classes and not o in notes2[index].expressions[0].classes):
+			
+			continue
+
+		elif(item.expressions[0].classes[item.expressions[0].classes.index(o)-1]!=notes2[index].expressions[0].classes[notes2[index].expressions[0].classes.index(o)-1]):
 
 			print "different ornaments"
 			test=True

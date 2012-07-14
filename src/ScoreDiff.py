@@ -4,103 +4,111 @@ from ScoreException import *
 
 class ScoreDiff:
 
-	def __init__(self, score1, score2, localCorpusPath = '.'):
+    def __init__(self, score1, score2, localCorpusPath='.'):
 
-		music21.environment.set('localCorpusPath', localCorpusPath)
-		self.score1 = base.parse(score1)
-		self.score2 = base.parse(score2)
-		self.name1 = score1
-		self.name2 = score2
+        music21.environment.set('localCorpusPath', localCorpusPath)
+        self.score1 = base.parse(score1)
+        self.score2 = base.parse(score2)
+        self.name1 = score1
+        self.name2 = score2
 
-	"""Useful for displaying the differences.  Be aware that
-	finale notepad will distort the note spacing if selecting
-	a single measure"""
-	def display(self, start_measure = 0, end_measure = 0):
-		
-		partial1 = self.score1.measures(start_measure, end_measure)
-		partial2 = self.score2.measures(start_measure, end_measure)
+    """Useful for displaying the differences.  Be aware that
+    finale notepad will distort the note spacing if selecting
+    a single measure"""
+    def display(self, start_measure=0, end_measure=0):
+        
+        partial1 = self.score1.measures(start_measure, end_measure)
+        partial2 = self.score2.measures(start_measure, end_measure)
 
-		partial1.show()
-		partial2.show()
+        partial1.show()
+        partial2.show()
 
-	def have_same_key(self, msr=0, part=0):
+    
+    def verify_part_number(self, part):
 
-		verify_part_number(part)
-		
-		return self.score1.parts[part].measure(msr).keySignature.pitchAndMode == self.score2.parts[part].measure(msr).keySignature.pitchAndMode
+        if (part > len(self.score1.parts)):
 
-	def verify_part_number(self, part):
+            raise ScoreException("part number " + str(part) + " does not exist for " + self.name1)
 
-		if (part > len(self.score1.parts)):
+        if (part > len(self.score2.parts)):
 
-			raise ScoreException("part number "+str(part)+" does not exist for "+self.name1)
+            raise ScoreException("part number " + str(part) + " does not exist for " + self.name2)
+    
+    
+    def have_same_key(self, msr=0, part=0):
 
-		if (part > len(self.score2.parts)):
+        self.verify_part_number(part)
+        
+        return self.score1.parts[part].measure(msr).keySignature.pitchAndMode == self.score2.parts[part].measure(msr).keySignature.pitchAndMode
 
-			raise ScoreException("part number "+str(part)+" does not exist for "+self.name2)
-		
-	def have_same_time_signature(self, msr = 0, part = 0):
-		
-		verify_part_number(part)
+    
+    def have_same_time_signature(self, msr=0, part=0):
+        
+        self.verify_part_number(part)
 
-		return self.score1.parts[part].measure(msr).timeSignature.numerator==self.score2.parts[part].measure(msr).numerator and self.score1.parts[part].measure(msr).timeSignature.denominator==self.score2.parts[part].measure(msr).timeSignature.denominator
+        return self.score1.parts[part].measure(msr).timeSignature.numerator == self.score2.parts[part].measure(msr).numerator and self.score1.parts[part].measure(msr).timeSignature.denominator == self.score2.parts[part].measure(msr).timeSignature.denominator
 
-	def have_same_pitches(self, msr = 0, part = 0):
+    
+    def have_same_pitches(self, msr=0, part=0):
 
-		verify_part_number(part)
+        self.verify_part_number(part)
 
-		pitches1 = self.score1.parts[part].pitches
-		pitches2 = self.score2.parts[part].pitches
+        pitches1 = self.score1.parts[part].pitches
+        pitches2 = self.score2.parts[part].pitches
 
-		return pitches1 == pitches2
+        return pitches1 == pitches2
 
-	def have_same_clef_markings(self, msr = 0, part = 0):
+    
+    def have_same_clef_markings(self, msr=0, part=0):
 
-		verify_part_number(part)
+        self.verify_part_number(part)
 
-		return self.score1.parts[part].measure(msr).clef.sign == self.score2.parts[part].measure(msr).clef.sign
-	
-	def have_same_accidentals(self, msr = 0, part = 0):
+        return self.score1.parts[part].measure(msr).clef.sign == self.score2.parts[part].measure(msr).clef.sign
+    
+    
+    def have_same_accidentals(self, msr=0, part=0):
 
-		verify_part_number(part)
+        self.verify_part_number(part)
 
-		notes1 = self.score1.parts[part].measure(msr).notes
-		notes2 = self.score2.parts[part].measure(msr).notes
+        notes1 = self.score1.parts[part].measure(msr).notes
+        notes2 = self.score2.parts[part].measure(msr).notes
 
-		for index in range(0, len(notes1)):
+        for index in range(0, len(notes1)):
 
-			if(notes1[index].pitch.accidental is None and not (notes2[index].pitch.accidental is None)):
-				
-				return False
-			
-			elif(notes2[index].pitch.accidental is None and not(notes1[index].pitch.accidental is None)):
+            if(notes1[index].pitch.accidental is None and not (notes2[index].pitch.accidental is None)):
+                
+                return False
+            
+            elif(notes2[index].pitch.accidental is None and not(notes1[index].pitch.accidental is None)):
 
-				return False
+                return False
 
-			elif(notes1[index].pitch.accidental is None and  notes2[index].pitch.accidental is None):
+            elif(notes1[index].pitch.accidental is None and  notes2[index].pitch.accidental is None):
 
-				continue
-			
-			elif(notes1[index].pitch.accidental.fullName != notes2[index].pitch.accidental.fullName):
+                continue
+            
+            elif(notes1[index].pitch.accidental.fullName != notes2[index].pitch.accidental.fullName):
 
-				return False
+                return False
 
-		return True
+        return True
 
-	def have_same_stem_directions(self, msr = 0, part= 0):
+    
+    def have_same_stem_directions(self, msr=0, part=0):
 
-		verify_part_number(part)
+        self.verify_part_number(part)
 
-		notes1 = self.score1.parts[part].measure(msr).notes
-		notes2 = self.score2.parts[part].measure(msr).notes
+        notes1 = self.score1.parts[part].measure(msr).notes
+        notes2 = self.score2.parts[part].measure(msr).notes
 
-		for index in range(0, len(notes1)):
+        for index in range(0, len(notes1)):
 
-			if(notes1[index].stemDirection != notes2[index].stemDirection):
+            if(notes1[index].stemDirection != notes2[index].stemDirection):
 
-				return False
+                return False
 
-		return True
+        return True
 
 
-		
+        
+

@@ -39,14 +39,24 @@ class ScoreDiff:
 
         self.verify_part_number(part)
         
-        return self.score1.parts[part].measure(msr).keySignature.pitchAndMode == self.score2.parts[part].measure(msr).keySignature.pitchAndMode
+	key_siganture1 = self.score1.parts[part].measure(msr).keySignature
+	key_signature2 = self.score2.parts[part].measure(msr).keySignature
+       
+       return key_signature1.pitchAndMode == key_signature2.pitchAndMode
 
     
     def have_same_time_signature(self, msr=0, part=0):
         
         self.verify_part_number(part)
 
-        return self.score1.parts[part].measure(msr).timeSignature.numerator == self.score2.parts[part].measure(msr).numerator and self.score1.parts[part].measure(msr).timeSignature.denominator == self.score2.parts[part].measure(msr).timeSignature.denominator
+	time_signature1 = self.score1.parts[part].measure(msr).timeSignature
+	time_signature2 = self.score2.parts[part].measure(msr).timeSignature
+	numerator1 = time_signature1.numerator
+	numerator2 = time_signature2.numerator
+	denominator1 = time_signature1.denominator
+	denominator2 = time_signature2.denominator
+	
+     	return numerator1 == numerator2 and denominator1 == denominator2 
 
     
     def have_same_pitches(self, msr=0, part=0):
@@ -63,7 +73,10 @@ class ScoreDiff:
 
         self.verify_part_number(part)
 
-        return self.score1.parts[part].measure(msr).clef.sign == self.score2.parts[part].measure(msr).clef.sign
+	clef1 = self.score1.parts[part].measure(msr).clef
+	clef2 = self.score2.parts[part].measure(msr).clef
+
+        return clef1.sign == clef2.sign
     
     
     def have_same_accidentals(self, msr=0, part=0):

@@ -12,22 +12,19 @@ class ScoreDiff:
 		self.name1 = score1
 		self.name2 = score2
 
-	#convenience method for debugging
-	def display(self, score_number = 1):
+	"""Useful for displaying the differences.  Be aware that
+	finale notepad will distort the note spacing if selecting
+	a single measure"""
+	def display(self, start_measure = 0, end_measure = 0):
 		
-		if (score_number == 1):
-			
-			self.score1.show()
+		partial1 = self.score1.measures(start_measure, end_measure)
+		partial2 = self.score2.measures(start_measure, end_measure)
 
-		elif (score_number == 2):
+		partial1.show()
+		partial2.show()
 
-			self.score2.show()
 	
-		else:
-		
-			raise ScoreException("Enter either 1 or 2 if specifying a score number")
-	
-	def have_same_key_signature(self, msr=0, part=0):
+	def have_same_key(self, msr=0, part=0):
 
 		if (part > len(self.score1.parts)):
 

@@ -86,16 +86,8 @@ class ScoreDiff:
 
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
-        
-        if(len(notes1) != len(notes2)):
-            
-            limit = min(len(notes1), len(notes2))
-            
-        else:
-            
-            limit=len(notes1)
 
-        for index in range(0, limit):
+        for index in range(0, min(len(notes1),len(notes2))):
 
             if(notes1[index].pitch.accidental is None and not (notes2[index].pitch.accidental is None)):
                 
@@ -123,23 +115,12 @@ class ScoreDiff:
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
         
-        if(len(notes1) != len(notes2)):
-            
-            limit = min(len(notes1), len(notes2))
-            
-        else:
-            
-            limit = len(len(notes1))
-
-        for index in range(0, limit):
+        for index in range(0, min(len(notes1), len(notes2))):
 
             if(notes1[index].stemDirection != notes2[index].stemDirection):
 
                 return False
 
         return True
-
-
-        
     
 

@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ScoreDiff Documentation &mdash; ScoreDiff 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="ScoreDiff 1.0.0 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to ScoreDiff’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to ScoreDiff’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">ScoreDiff 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-ScoreDiff">
+<span id="scorediff-documentation"></span><h1>ScoreDiff Documentation<a class="headerlink" href="#module-ScoreDiff" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-ScoreDiff"></span><dl class="class">
+<dt id="ScoreDiff.ScoreDiff">
+<em class="property">class </em><tt class="descclassname">ScoreDiff.</tt><tt class="descname">ScoreDiff</tt><big>(</big><em>score1</em>, <em>score2</em>, <em>localCorpusPath='.'</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="ScoreDiff.ScoreDiff.display">
+<tt class="descname">display</tt><big>(</big><em>start_measure=0</em>, <em>end_measure=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Useful for displaying the differences between the two scores visually</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>start_measure (int): A measure number to start from
+end_measure (int):  A measure number to end at.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.have_same_accidentals">
+<tt class="descname">have_same_accidentals</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_accidentals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same accidentals at the specified measure and for the specified part</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>msr (int):  the measure number at which to make the comparison
+part (int): the part for which to make the comparison</dd>
+<dt>Returns:</dt>
+<dd><p class="first">boolean.   The result of the comparison:</p>
+<div class="last highlight-python"><pre>True -- The scores have the same accidentals
+False -- The scores do not have the same accidentals</pre>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.have_same_articulations">
+<tt class="descname">have_same_articulations</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_articulations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same accidentals at the specified measure and for the specified part</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>msr (int):  the measure number at which to make the comparison
+part (int): the part for which to make the comparison</dd>
+<dt>Returns:</dt>
+<dd><p class="first">boolean.   The result of the comparison:</p>
+<div class="last highlight-python"><pre>True -- The scores have the same accidentals
+False -- The scores do not have the same accidentals</pre>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.have_same_clef_markings">
+<tt class="descname">have_same_clef_markings</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_clef_markings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same clef markings at the specified measure and for the specified part</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>msr (int):  the measure number at which to make the comparison
+part (int): the part for which to make the comparison</dd>
+<dt>Returns:</dt>
+<dd><p class="first">boolean.   The result of the comparison:</p>
+<div class="last highlight-python"><pre>True -- The scores have the same clef markings
+False -- The scores do not have the same clef markings</pre>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.have_same_key">
+<tt class="descname">have_same_key</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both are in the same key at the specified measure and for the specified part</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>msr (int):  the measure number at which to make the comparison
+part (int): the part for which to make the comparison</dd>
+<dt>Returns:</dt>
+<dd><p class="first">boolean.   The result of the comparison:</p>
+<div class="last highlight-python"><pre>True -- The scores have the same key
+False -- The scores do not have the same key</pre>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.have_same_ornaments">
+<tt class="descname">have_same_ornaments</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_ornaments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same ornaments at the specified measure and for the specified part</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>msr (int):  the measure number at which to make the comparison
+part (int): the part for which to make the comparison</dd>
+<dt>Returns:</dt>
+<dd><p class="first">boolean.   The result of the comparison:</p>
+<div class="last highlight-python"><pre>True -- The scores have the same ornaments
+False -- The scores do not have the same ornaments</pre>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.have_same_pitches">
+<tt class="descname">have_same_pitches</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_pitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same time pitches at the specified measure and for the specified part</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>msr (int):  the measure number at which to make the comparison
+part (int): the part for which to make the comparison</dd>
+<dt>Returns:</dt>
+<dd><p class="first">boolean.   The result of the comparison:</p>
+<div class="last highlight-python"><pre>True -- The scores have the same pitches
+False -- The scores do not have the same pitches</pre>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.have_same_spanners">
+<tt class="descname">have_same_spanners</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_spanners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same spanners at the specified measure and for the specified part</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>msr (int):  the measure number at which to make the comparison
+part (int): the part for which to make the comparison</dd>
+<dt>Returns:</dt>
+<dd><p class="first">boolean.   The result of the comparison:</p>
+<div class="last highlight-python"><pre>True -- The scores have the same spanners
+False -- The scores do not have the same spanners</pre>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.have_same_stem_directions">
+<tt class="descname">have_same_stem_directions</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_stem_directions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same stem directions at the specified measure and for the specified part</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>msr (int):  the measure number at which to make the comparison
+part (int): the part for which to make the comparison</dd>
+<dt>Returns:</dt>
+<dd><p class="first">boolean.   The result of the comparison:</p>
+<div class="last highlight-python"><pre>True -- The scores have the same stem directions
+False -- The scores do not have the same stem directions</pre>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.have_same_time_signature">
+<tt class="descname">have_same_time_signature</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_time_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same time signature at the specified measure and for the specified part</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>msr (int):  the measure number at which to make the comparison
+part (int): the part for which to make the comparison</dd>
+<dt>Returns:</dt>
+<dd><p class="first">boolean.   The result of the comparison:</p>
+<div class="last highlight-python"><pre>True -- The scores have the same key
+False -- The scores do not have the same key</pre>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.verify_part_number">
+<tt class="descname">verify_part_number</tt><big>(</big><em>part</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.verify_part_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks to make sure the part number a user has entered is not outside of the range that exists for either score</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>part (int): The part number to check</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to ScoreDiff&#8217;s documentation!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/ScoreDiff.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to ScoreDiff’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">ScoreDiff 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Julien Dubeau.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 import music21.environment
 from music21.corpus import base
 from ScoreException import *
+import math
 
 class ScoreDiff:
 
@@ -39,24 +40,24 @@ class ScoreDiff:
 
         self.verify_part_number(part)
         
-	key_siganture1 = self.score1.parts[part].measure(msr).keySignature
-	key_signature2 = self.score2.parts[part].measure(msr).keySignature
+        key_signature1 = self.score1.parts[part].measure(msr).keySignature
+        key_signature2 = self.score2.parts[part].measure(msr).keySignature
        
-       return key_signature1.pitchAndMode == key_signature2.pitchAndMode
+        return key_signature1.pitchAndMode == key_signature2.pitchAndMode
 
     
     def have_same_time_signature(self, msr=0, part=0):
         
         self.verify_part_number(part)
 
-	time_signature1 = self.score1.parts[part].measure(msr).timeSignature
-	time_signature2 = self.score2.parts[part].measure(msr).timeSignature
-	numerator1 = time_signature1.numerator
-	numerator2 = time_signature2.numerator
-	denominator1 = time_signature1.denominator
-	denominator2 = time_signature2.denominator
-	
-     	return numerator1 == numerator2 and denominator1 == denominator2 
+        time_signature1 = self.score1.parts[part].measure(msr).timeSignature
+        time_signature2 = self.score2.parts[part].measure(msr).timeSignature
+        numerator1 = time_signature1.numerator
+        numerator2 = time_signature2.numerator
+        denominator1 = time_signature1.denominator
+        denominator2 = time_signature2.denominator
+    
+        return numerator1 == numerator2 and denominator1 == denominator2 
 
     
     def have_same_pitches(self, msr=0, part=0):
@@ -73,8 +74,8 @@ class ScoreDiff:
 
         self.verify_part_number(part)
 
-	clef1 = self.score1.parts[part].measure(msr).clef
-	clef2 = self.score2.parts[part].measure(msr).clef
+        clef1 = self.score1.parts[part].measure(msr).clef
+        clef2 = self.score2.parts[part].measure(msr).clef
 
         return clef1.sign == clef2.sign
     
@@ -85,8 +86,16 @@ class ScoreDiff:
 
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
+        
+        if(len(notes1) != len(notes2)):
+            
+            limit = min(len(notes1), len(notes2))
+            
+        else:
+            
+            limit=len(notes1)
 
-        for index in range(0, len(notes1)):
+        for index in range(0, limit):
 
             if(notes1[index].pitch.accidental is None and not (notes2[index].pitch.accidental is None)):
                 
@@ -113,8 +122,16 @@ class ScoreDiff:
 
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
+        
+        if(len(notes1) != len(notes2)):
+            
+            limit = min(len(notes1), len(notes2))
+            
+        else:
+            
+            limit = len(len(notes1))
 
-        for index in range(0, len(notes1)):
+        for index in range(0, limit):
 
             if(notes1[index].stemDirection != notes2[index].stemDirection):
 
@@ -124,4 +141,5 @@ class ScoreDiff:
 
 
         
+    
 

@@ -1,10 +1,10 @@
 """
-File:    ScoreDiff.py
+File:      ScoreDiff.py
 Author:    Julien Dubeau
-Purpose:    To provide a class that can be used to compare and display 
-            differences between two music scores in the musicxml format
-Input:    The class __init__ function takes as input two score names, and an optional
-          corpus path if the scores are located elsewhere
+Purpose:   To provide a class that can be used to compare and display 
+           differences between two music scores in the musicxml format
+Input:     The class __init__ function takes as input two score names, and an optional
+           corpus path if the scores are located elsewhere
 """
 
 import music21.environment
@@ -23,7 +23,7 @@ class ScoreDiff:
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Function:    __init__
-    Purpose:    Initializes the ScoreDiff object.
+    Purpose:     Initializes the ScoreDiff object.
     
     """
     def __init__(self, score1, score2, localCorpusPath='.'):
@@ -38,11 +38,11 @@ class ScoreDiff:
     
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Function:    display
-    Purpose:    To display the differences between the two scores visually
-    Input Args:    start_measure:  A measure number to start from.  Defaults to 0
-                   end_measure:    A measure number to end at.  Defaults to 0
-    Output:    Two partial scores which should allow the user to see the differences side
-                by side
+    Purpose:     To display the differences between the two scores visually
+    Input Args:  start_measure:  A measure number to start from.  Defaults to 0
+                 end_measure:    A measure number to end at.  Defaults to 0
+    Output:      Two partial scores which should allow the user to see the differences side
+                 by side
     """
     
     def display(self, start_measure=0, end_measure=0):
@@ -57,11 +57,11 @@ class ScoreDiff:
     
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Function:    verify_part_number
-    Purpose:    To make sure the part number a user has entered is not outside of the range that makes
-                sense for the two scores
-    Input:    part:    the part number to check
-    Ouput:    The function will raise a ScoreException if the part number is outside the appropriate range
-              and will do nothing if the part number is acceptable
+    Purpose:     To make sure the part number a user has entered is not outside of the range that makes
+                 sense for the two scores
+    Input:       part:    the part number to check
+    Ouput:       The function will raise a ScoreException if the part number is outside the appropriate range
+                 and will do nothing if the part number is acceptable
     
     """
     def verify_part_number(self, part):
@@ -77,11 +77,11 @@ class ScoreDiff:
         """ verify_part_number """
         
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    Function:    have_same_key
-    Purpose:    To check if the two scores both are in the same key at the specified measure
-                and for the specified part
-    Input:     msr:    the measure number at which to make the comparison
-               part:    the part for which to make the comparison
+    Function:        have_same_key
+    Purpose:         To check if the two scores both are in the same key at the specified measure
+                     and for the specified part
+    Input:           msr:    the measure number at which to make the comparison
+                     part:   the part for which to make the comparison
     Return Value:    a boolean value representing whether or not the keys are the same
     
     """
@@ -97,11 +97,11 @@ class ScoreDiff:
         """ have_same_key """
         
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    Function:    have_same_time_signature
-    Purpose:    To check if the two scores have the same time signature at the specified
-                measure and for the specified part
-    Input:    msr:    the measure number at which to make the comparison
-              part:   the part for which to make the comparsion
+    Function:        have_same_time_signature
+    Purpose:         To check if the two scores have the same time signature at the specified
+                     measure and for the specified part
+    Input:           msr:    the measure number at which to make the comparison
+                     part:   the part for which to make the comparsion
     Return Value:    a boolean value representing whether or not the time signatures are the same
     
     """
@@ -121,11 +121,11 @@ class ScoreDiff:
         """ have_same_time_signature """
         
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    Function:    have_same_pitches
-    Purpose:    To check if the two scores have the same pitches at the specified measure
-                and for the specified part
-    Input:    msr:    the measure number at which to make the comparison
-              part:    the part for which to make the comparison
+    Function:        have_same_pitches
+    Purpose:         To check if the two scores have the same pitches at the specified measure
+                     and for the specified part
+    Input:           msr:    the measure number at which to make the comparison
+                     part:   the part for which to make the comparison
     Return Value:    a boolean value representing whether or not the pithces are the same
     
     
@@ -142,13 +142,13 @@ class ScoreDiff:
         """ have_same_pitches """
         
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    Function:    have_same_clef_markings
-    Purpose:    To check if the two scores have the same clef markings at the
-                specified measure and for the specified part
-    Input:    msr:    the measure number at which to make the comparison
-              part:    the part for which to make the comparison
+    Function:        have_same_clef_markings
+    Purpose:         To check if the two scores have the same clef markings at the
+                     specified measure and for the specified part
+    Input:           msr:    the measure number at which to make the comparison
+                     part:   the part for which to make the comparison
     Return Value:    a boolean value representing whether or not the clef
-                    markings are the same
+                     markings are the same
     
     """
     def have_same_clef_markings(self, msr=0, part=0):
@@ -163,15 +163,15 @@ class ScoreDiff:
         """ have_same_clef_markings """
         
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    Function:    have_same_accidentals
-    Purpose:    To check if the two scores have the same accidentals at the specified measure and for the
-                specified part
-    Input:    msr:    the measure number at which to make the comparison
-              part:    the part for which to make the comparison
+    Function:        have_same_accidentals
+    Purpose:         To check if the two scores have the same accidentals at the specified measure and for the
+                     specified part
+    Input:           msr:    the measure number at which to make the comparison
+                     part:   the part for which to make the comparison
     Return Value:    a boolean value representing whether or not the accidentals are the same
-    Notes:    Because there is no guarantee that a user will enter in a measure for which
-              the number of notes are the same in score1 and score2, the function will iterate through
-              only enough notes to cover the smaller of the two measures.
+    Notes:           Because there is no guarantee that a user will enter in a measure for which
+                     the number of notes are the same in score1 and score2, the function will iterate through
+                     only enough notes to cover the smaller of the two measures.
     
     """
     def have_same_accidentals(self, msr=0, part=0):
@@ -204,16 +204,16 @@ class ScoreDiff:
         """ have_same_accidentals """
         
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    Function:    have_same_stem_directions
-    Purpose:    To check if the two scores have the same stem directions on notes
-                at the specified measure and for the specified part
-    Input:    msr:    the measure at which the comparison should be made
-              part:    the part for which to make the comparison
+    Function:        have_same_stem_directions
+    Purpose:         To check if the two scores have the same stem directions on notes
+                     at the specified measure and for the specified part
+    Input:           msr:    the measure at which the comparison should be made
+                     part:   the part for which to make the comparison
     Return Value:    a boolean value representing whether or not the stem directions
-                    are the same
-    Notes:    Because there is no guarantee that a user will enter in a measure for which
-              the number of notes are the same in score1 and score2, the function will iterate through
-              only enough notes to cover the smaller of the two measures.
+                     are the same
+    Notes:           Because there is no guarantee that a user will enter in a measure for which
+                     the number of notes are the same in score1 and score2, the function will iterate through
+                     only enough notes to cover the smaller of the two measures.
     
     """
     
@@ -234,16 +234,16 @@ class ScoreDiff:
         """ have_same_stem_directions """
         
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    Function:    have_same_ornaments
-    Purpose:    To check if the two scores have the same ornaments on notes
-                at the specified measure and for the specified part
-    Input:    msr:    the measure at which the comparison should be made
-              part:    the part for which to make the comparison
+    Function:        have_same_ornaments
+    Purpose:         To check if the two scores have the same ornaments on notes
+                     at the specified measure and for the specified part
+    Input:           msr:    the measure at which the comparison should be made
+                     part:   the part for which to make the comparison
     Return Value:    a boolean representing whether or not the ornaments are the
-                    same
-    Notes:    Because there is no guarantee that a user will enter in a measure for which
-              the number of notes are the same in score1 and score2, the function will iterate through
-              only enough notes to cover the smaller of the two measures.
+                     same
+    Notes:           Because there is no guarantee that a user will enter in a measure for which
+                     the number of notes are the same in score1 and score2, the function will iterate through
+                     only enough notes to cover the smaller of the two measures.
 
     
     """
@@ -315,21 +315,21 @@ class ScoreDiff:
         """ have_same_ornaments """
     
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    Function:    have_same_spanners
-    Purpose:    To check if the two scores have the same spanners at the specified measure and
-                for the specified part
-    Input:    msr:    the measure at which the comparison should be made
-              part:    the part for which to make the comparison
-    Return Value:    a boolean value representing whether or not the spanners are the same
-    Notes:   (1) Because there is no guarantee that a user will enter in a measure for which
-              the number of notes are the same in score1 and score2, the function will iterate through
-              only enough notes to cover the smaller of the two measures.
-            (2)'Spanner' is not exactly a technical music term.  It is a term used by music21
-            Some examples of things considered spanners are crescendos, slurs, extended trills,
-            and glissandos.  Have a look at the music21 documentation at: 
-            http://mit.edu/music21/doc/html/moduleSpanner.html?highlight=spanner#music21.spanner
+    Function:       have_same_spanners
+    Purpose:        To check if the two scores have the same spanners at the specified measure and
+                    for the specified part
+    Input:          msr:    the measure at which the comparison should be made
+                    part:   the part for which to make the comparison
+    Return Value:   a boolean value representing whether or not the spanners are the same
+    Notes:          (1) Because there is no guarantee that a user will enter in a measure for which
+                    the number of notes are the same in score1 and score2, the function will iterate through
+                    only enough notes to cover the smaller of the two measures.
+                    (2)'Spanner' is not exactly a technical music term.  It is a term used by music21
+                    Some examples of things considered spanners are crescendos, slurs, extended trills,
+                    and glissandos.  Have a look at the music21 documentation at: 
+                    http://mit.edu/music21/doc/html/moduleSpanner.html?highlight=spanner#music21.spanner
             
-            to read more about spanners
+                    to read more about spanners
     
     """    
     
@@ -351,20 +351,20 @@ class ScoreDiff:
         """ have_same_spanners """
         
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    Function:    have_same_articulations
-    Purpose:    To check if the two scores have the same articulations on notes
-                at the specified measure and for the specified part
-    Input:    msr:    the measure at which the comparison should be made
-              part:    the part for which to make the comparison
-    Return Value:    a boolean value representing whether or not the articulations
-                    are the same
-    Notes:    (1)  Because there is no guarantee that a user will enter in a measure for which
-              the number of notes are the same in score1 and score2, the function will iterate through
-              only enough notes to cover the smaller of the two measures.
-            (2) Have a look at: 
-            http://mit.edu/music21/doc/html/moduleArticulations.html?highlight=articulations#music21.articulations
+    Function:      have_same_articulations
+    Purpose:       To check if the two scores have the same articulations on notes
+                   at the specified measure and for the specified part
+    Input:         msr:    the measure at which the comparison should be made
+                   part:   the part for which to make the comparison
+    Return Value:  a boolean value representing whether or not the articulations
+                   are the same
+    Notes:         (1)  Because there is no guarantee that a user will enter in a measure for which
+                   the number of notes are the same in score1 and score2, the function will iterate through
+                   only enough notes to cover the smaller of the two measures.
+                   (2) Have a look at: 
+                   http://mit.edu/music21/doc/html/moduleArticulations.html?highlight=articulations#music21.articulations
             
-            to read more about what music21 considers an articulation to be
+                   to read more about what music21 considers an articulation to be
     
     """
          
@@ -384,4 +384,5 @@ class ScoreDiff:
         return True
     
         """ have_same_articulations """
+
 

@@ -36,7 +36,7 @@ class ScoreDiff:
         
         """ __init__ """
     
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Function:    display
     Purpose:    To display the differences between the two scores visually
     Input Args:    start_measure:  A measure number to start from.  Defaults to 0
@@ -76,7 +76,7 @@ class ScoreDiff:
     
         """ verify_part_number """
         
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Function:    have_same_key
     Purpose:    To check if the two scores both are in the same key at the specified measure
                 and for the specified part
@@ -96,7 +96,7 @@ class ScoreDiff:
 
         """ have_same_key """
         
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Function:    have_same_time_signature
     Purpose:    To check if the two scores have the same time signature at the specified
                 measure and for the specified part
@@ -141,7 +141,7 @@ class ScoreDiff:
 
         """ have_same_pitches """
         
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Function:    have_same_clef_markings
     Purpose:    To check if the two scores have the same clef markings at the
                 specified measure and for the specified part
@@ -203,7 +203,7 @@ class ScoreDiff:
 
         """ have_same_accidentals """
         
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Function:    have_same_stem_directions
     Purpose:    To check if the two scores have the same stem directions on notes
                 at the specified measure and for the specified part
@@ -314,7 +314,7 @@ class ScoreDiff:
     
         """ have_same_ornaments """
     
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Function:    have_same_spanners
     Purpose:    To check if the two scores have the same spanners at the specified measure and
                 for the specified part
@@ -350,7 +350,7 @@ class ScoreDiff:
 
         """ have_same_spanners """
         
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Function:    have_same_articulations
     Purpose:    To check if the two scores have the same articulations on notes
                 at the specified measure and for the specified part

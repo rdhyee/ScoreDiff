@@ -4,6 +4,12 @@ from ScoreException import *
 import math
 
 class ScoreDiff:
+    
+    ornaments = ['Appoggiatura', 'GeneralAppoggiatura', 'GeneralMordent', 'HalfStepAppoggiatura',
+                 'HalfSetpInvertedAppoggiatura', 'HalfStepInvertedMordent', 'HalfStepMordent', 'HalfStepTrill',
+                 'InvertedAppoggiatura', 'InvertedMordent', 'InvertedTurn', 'Mordent', 'Schleifer', 'Shake',
+                 'Tremolo', 'Trill', 'Turn', 'WholeStepAppoggiatura', 'WholeStepInvertedAppoggiatura',
+                 'WholeStepInvertedMordent', 'WholeStepMordent', 'WholeStepTrill']
 
     def __init__(self, score1, score2, localCorpusPath='.'):
 
@@ -122,5 +128,70 @@ class ScoreDiff:
                 return False
 
         return True
+    
+    def have_same_ornaments(self, msr = 0, part = 0):
+        
+        self.verify_part_number(part)
+        
+        notes1 = self.score1.parts[part].measure(msr).notes
+        notes2 = self.score2.parts[part].measure(msr).notes
+        
+        for index in range(0,min(len(notes1),len(notes2))):
+            
+            e1 = notes1[index].expressions
+            e2 = notes2[index].expressions
+            
+            if(e1 == [] and not e2 == [] or e2 == [] and not e1 == []):
+                
+                return False
+            
+            elif(e1 == [] and e2 == []):
+                
+                continue
+            
+            ornaments1 = []
+            ornaments2 = []
+            
+            inner_index=0
+            while inner_index < min(len(e1),len(e2)):
+                
+                if(e1[inner_index] in ScoreDiff.ornaments):
+                    
+                    ornaments1.append(e1[inner_index])
+                
+                if(e2[inner_index] in ScoreDiff.ornaments):
+                    
+                    ornaments2.append(e2[inner_index])
+                    
+                inner_index+=1
+                
+            
+            if(max(len(e1),len(e2)) == len(e1)):
+                left_over = e1
+            
+            else:
+                
+                left_over = e2
+            
+            while inner_index < len(left_over):
+                
+                if(left_over[inner_index] in ScoreDiff.ornaments):
+                    
+                    if(left_over == e1):
+                        
+                        ornaments1.append(left_over[inner_index])
+                    else:
+                        
+                        ornaments2.append(left_over[inner_index])
+                
+                inner_index+=1
+                
+            if(ornaments1 != ornaments2):
+                
+                return False
+                    
+        return True
+
+        
     
 

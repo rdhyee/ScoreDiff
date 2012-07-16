@@ -29,7 +29,7 @@ def test_key(score1, score2, measure=0, part=0):
 	"""
 
 	diff = ScoreDiff(score1, score2, path)
-        return diff.have_same_key(measure, part)
+        return diff.have_same_key_signature(measure, part)
 
 def test_time_signature(score1, score2, measure = 0, part = 0):
 

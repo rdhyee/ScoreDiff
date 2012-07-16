@@ -48,19 +48,20 @@ class ScoreDiff:
         self.name2 = score2
         
            
-    def display(self, start_measure=0, end_measure=0):
+    def display(self, msr=0, part=0):
         """Useful for displaying the differences between the two scores visually
 
         Kwargs:
-          start_measure (int): A measure number to start from
-          
-	  end_measure (int):  A measure number to end at.
-    
-    
-        """
-        partial1 = self.score1.measures(start_measure, end_measure)
-        partial2 = self.score2.measures(start_measure, end_measure)
+          msr (int): A measure number to display
 
+	  part (int): A part number to examine.  If not specified then all parts are displayed
+          
+	  
+        """
+	self.verify_part_and_measure(msr, part)	
+	
+	partial1 = self.score1.parts[part].getElementsByClass('Measure')[msr]
+	partial2 = self.score2.parts[part].getElementsByClass('Measure')[msr]
         partial1.show()
         partial2.show()
 
@@ -84,7 +85,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(part, msr)
+	self.verify_part_and_measure(msr, part)
 
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
@@ -130,7 +131,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(part, msr)
+	self.verify_part_and_measure(msr, part)
         
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
@@ -163,7 +164,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(part, msr)
+	self.verify_part_and_measure(msr, part)
 
         clef1 = self.score1.parts[part].getElementsByClass('Measure')[msr].clef
         clef2 = self.score2.parts[part].getElementsByClass('Measure')[msr].clef
@@ -199,7 +200,7 @@ class ScoreDiff:
 
         """
         
-        self.verify_part_and_measure(part, msr)
+        self.verify_part_and_measure(msr, part)
         
         key_signature1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature
         key_signature2 = self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature
@@ -236,7 +237,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(part, msr)
+	self.verify_part_and_measure(msr, part)
         
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
@@ -318,7 +319,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(part, msr)
+	self.verify_part_and_measure(msr, part)
 
         pitches1 = self.score1.parts[part].pitches
         pitches2 = self.score2.parts[part].pitches
@@ -345,7 +346,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(part, msr)
+	self.verify_part_and_measure(msr, part)
         
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
@@ -378,7 +379,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(part, msr)
+	self.verify_part_and_measure(msr, part)
 
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
@@ -412,7 +413,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(part, msr)
+	self.verify_part_and_measure(msr, part)
 
         time_signature1 = self.score1.parts[part].getElementsByClass('Measure')[msr].timeSignature
         time_signature2 = self.score2.parts[part].getElementsByClass('Measure')[msr].timeSignature
@@ -433,7 +434,7 @@ class ScoreDiff:
         return numerator1 == numerator2 and denominator1 == denominator2 
 
               
-    def verify_part_and_measure(self, part, msr):
+    def verify_part_and_measure(self, msr, part):
         """Checks to make sure the part and measure numbers a user has entered are not outside of the range that exists for either score
 
         Args:
@@ -446,24 +447,36 @@ class ScoreDiff:
 
 
         """
+	self.verify_part(part)
 
-        if (part >= len(self.score1.parts) or part < 0):
-
-            raise ScoreException("part number " + str(part) + " does not exist for " + self.name1)
-
-        if (part >= len(self.score2.parts) or part < 0):
-
-            raise ScoreException("part number " + str(part) + " does not exist for " + self.name2)
-
-        if (msr >= len(self.score1.parts[part].getElementsByClass('Measure').elements) or msr < 0):
+	if (msr >= len(self.score1.parts[part].getElementsByClass('Measure').elements) or msr < 0):
 
 		raise ScoreException("measure number "+str(msr) + "does not exist for "+self.name1)
-
+	
 	if (msr >= len(self.score2.parts[part].getElementsByClass('Measure').elements) or msr < 0):
 		
 		raise ScoreException("measure number "+str(msr) + "does not exist for "+self.name2)
 
-	
+
+    def verify_part(self, part):
+        """Checks to make sure the part number a user has entered is not outside the range that exists for either score
+
+	Args:
+	  part (int): The part number to check
+
+	Raises:
+	  ScoreException
+
+	"""
+	if (part >= len(self.score1.parts) or part < 0):
+
+        	raise ScoreException("part number " + str(part) + " does not exist for " + self.name1)
+
+        if (part >= len(self.score2.parts) or part < 0):
+
+        	raise ScoreException("part number " + str(part) + " does not exist for " + self.name2)
+
+
 
 class ScoreException(Exception):
 	"""Class for handling exceptions while using the ScoreDiff tool

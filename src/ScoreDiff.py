@@ -31,7 +31,7 @@ class ScoreDiff:
         """Initializes a ScoreDiff object.
     
         Args:
-         score1 (str):  The pathname of a score to parse\n
+         score1 (str):  The pathname of a score to parse
          score2 (str):  The pathname of a score to parse and compare to score1
 
         Kwargs:

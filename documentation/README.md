@@ -1,1 +1,1 @@
-Open up the index.html page with a browser to view the documentation
+Open up the index.html page with a browser to view documentation

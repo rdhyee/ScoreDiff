@@ -23,6 +23,9 @@ def test_key(score1, score2, measure=0, part=0):
 	   >>> test_key('bwv66.6.mxl', 'different_key3.mxl', 5)
 	   False
 
+	   >>> test_key('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
+	   False
+
 	"""
 
 	diff = ScoreDiff(score1, score2, path)

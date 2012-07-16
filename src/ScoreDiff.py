@@ -209,6 +209,14 @@ class ScoreDiff:
 
         clef1 = self.score1.parts[part].measure(msr).clef
         clef2 = self.score2.parts[part].measure(msr).clef
+	
+	if(clef1 == None and not clef2 == None or clef2 == None and not clef1 == None):
+
+		return False
+
+	if(clef1 == None and clef2 == None):
+
+		return True
 
         return clef1.sign == clef2.sign
     

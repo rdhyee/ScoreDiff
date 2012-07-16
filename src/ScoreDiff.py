@@ -447,19 +447,19 @@ class ScoreDiff:
 
         """
 
-        if (part > len(self.score1.parts) or part < 0):
+        if (part >= len(self.score1.parts) or part < 0):
 
             raise ScoreException("part number " + str(part) + " does not exist for " + self.name1)
 
-        if (part > len(self.score2.parts) or part < 0):
+        if (part >= len(self.score2.parts) or part < 0):
 
             raise ScoreException("part number " + str(part) + " does not exist for " + self.name2)
 
-        if (msr > len(self.score1.parts[part].getElementsByClass('Measure').elements) or msr < 0):
+        if (msr >= len(self.score1.parts[part].getElementsByClass('Measure').elements) or msr < 0):
 
 		raise ScoreException("measure number "+str(msr) + "does not exist for "+self.name1)
 
-	if (msr > len(self.score2.parts[part].getElementsByClass('Measure').elements) or msr < 0):
+	if (msr >= len(self.score2.parts[part].getElementsByClass('Measure').elements) or msr < 0):
 		
 		raise ScoreException("measure number "+str(msr) + "does not exist for "+self.name2)
 

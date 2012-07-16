@@ -179,8 +179,8 @@ class ScoreDiff:
         return clef1.sign == clef2.sign
     
 
-    def have_same_key(self, msr=0, part=0):
-        """Checks if the two scores both are in the same key at the specified measure and for the specified part
+    def have_same_key_signature(self, msr=0, part=0):
+        """Checks if the two scores both have the same key signature at the specified measure and for the specified part
 
         Kwargs:
           msr (int):  the measure number at which to make the comparison
@@ -212,7 +212,7 @@ class ScoreDiff:
 		
 		return True
         
-	return key_signature1.pitchAndMode == key_signature2.pitchAndMode
+	return key_signature1.sharps == key_signature2.sharps
 
 
 

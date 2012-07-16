@@ -3,7 +3,7 @@
 .. module:: ScoreDiff
     :synopsis: A module for comparing two musicxml files and displaying the differences
 
-.. moduleauthor:: Julien Dubeau <jdubeau@dons.usfca.edu>
+..  moduleauthor:: Julien Dubeau <jdubeau@dons.usfca.edu>
 
 
 """
@@ -469,9 +469,9 @@ class ScoreException(Exception):
 
 .. rubric:: Footnotes
 
-.. [#f1] http://mit.edu/music21/doc/html/moduleArticulations.html?highlight=articulation#music21.articulations
+.. [#f2] http://mit.edu/music21/doc/html/moduleArticulations.html?highlight=articulation#music21.articulations
 
-.. [#f2] http://mit.edu/music21/doc/html/moduleSpanner.html
+.. [#f1] http://mit.edu/music21/doc/html/moduleSpanner.html
 
 """
 

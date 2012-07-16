@@ -31,7 +31,7 @@ class ScoreDiff:
         """Initializes a ScoreDiff object.
     
         Args:
-         score1 (str):  The pathname of a score to parse
+         score1 (str):  The pathname of a score to parse\n
          score2 (str):  The pathname of a score to parse and compare to score1
 
         Kwargs:
@@ -51,7 +51,7 @@ class ScoreDiff:
         """Useful for displaying the differences between the two scores visually
 
         Kwargs:
-          start_measure (int): A measure number to start from
+          start_measure (int): A measure number to start from\n
           end_measure (int):  A measure number to end at.
     
     
@@ -66,7 +66,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same accidentals at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr (int):  the measure number at which to make the comparison\n
           part (int): the part for which to make the comparison
 
         Returns:
@@ -111,7 +111,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same articulations at the specified measure and for the specified part [#f2]_
 	
 	Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr (int):  the measure number at which to make the comparison\n
           part (int): the part for which to make the comparison
 
         Returns:
@@ -143,7 +143,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same clef markings at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr (int):  the measure number at which to make the comparison\n
           part (int): the part for which to make the comparison
 
         Returns:
@@ -178,7 +178,7 @@ class ScoreDiff:
         """Checks if the two scores both are in the same key at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr (int):  the measure number at which to make the comparison\n
           part (int): the part for which to make the comparison
 
         Returns:
@@ -214,7 +214,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same ornaments at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr (int):  the measure number at which to make the comparison\n
           part (int): the part for which to make the comparison
 
         Returns:
@@ -295,7 +295,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same pitches at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr (int):  the measure number at which to make the comparison\n
           part (int): the part for which to make the comparison
 
         Returns:
@@ -321,7 +321,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same spanners at the specified measure and for the specified part [#f1]_
 	
 	Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr (int):  the measure number at which to make the comparison\n
           part (int): the part for which to make the comparison
 
         Returns:
@@ -353,7 +353,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same stem directions at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr (int):  the measure number at which to make the comparison\n
           part (int): the part for which to make the comparison
 
         Returns:
@@ -386,7 +386,7 @@ class ScoreDiff:
         """Checks if the two scores both have the same time signature at the specified measure and for the specified part
 
         Kwargs:
-          msr (int):  the measure number at which to make the comparison
+          msr (int):  the measure number at which to make the comparison\n
           part (int): the part for which to make the comparison
 
         Returns:

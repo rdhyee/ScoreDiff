@@ -108,8 +108,16 @@ class ScoreDiff:
         
         key_signature1 = self.score1.parts[part].measure(msr).keySignature
         key_signature2 = self.score2.parts[part].measure(msr).keySignature
-       
-        return key_signature1.pitchAndMode == key_signature2.pitchAndMode
+        
+	if(key_signature1 == None and not key_signature2 == None or key_signature2==None and not key_signature1==None):
+		
+		return False
+	
+	elif(key_signature1==None and key_signature2==None):
+		
+		return True
+        
+	return key_signature1.pitchAndMode == key_signature2.pitchAndMode
 
     def have_same_time_signature(self, msr=0, part=0):
         """Checks if the two scores both have the same time signature at the specified measure and for the specified part

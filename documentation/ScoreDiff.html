@@ -55,7 +55,9 @@
 <span class="target" id="module-ScoreDiff"></span><dl class="class">
 <dt id="ScoreDiff.ScoreDiff">
 <em class="property">class </em><tt class="descclassname">ScoreDiff.</tt><tt class="descname">ScoreDiff</tt><big>(</big><em>score1</em>, <em>score2</em>, <em>localCorpusPath='.'</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<dd><p>The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
+to the initialization function, so that the user can detect and display certain differences.</p>
+<dl class="method">
 <dt id="ScoreDiff.ScoreDiff.display">
 <tt class="descname">display</tt><big>(</big><em>start_measure=0</em>, <em>end_measure=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.display" title="Permalink to this definition">¶</a></dt>
 <dd><p>Useful for displaying the differences between the two scores visually</p>
@@ -88,15 +90,15 @@ False -- The scores do not have the same accidentals</pre>
 <dl class="method">
 <dt id="ScoreDiff.ScoreDiff.have_same_articulations">
 <tt class="descname">have_same_articulations</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_articulations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the two scores both have the same accidentals at the specified measure and for the specified part</p>
+<dd><p>Checks if the two scores both have the same articulations at the specified measure and for the specified part <a class="footnote-reference" href="#f2" id="id1">[2]</a></p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd>msr (int):  the measure number at which to make the comparison
 part (int): the part for which to make the comparison</dd>
 <dt>Returns:</dt>
 <dd><p class="first">boolean.   The result of the comparison:</p>
-<div class="last highlight-python"><pre>True -- The scores have the same accidentals
-False -- The scores do not have the same accidentals</pre>
+<div class="last highlight-python"><pre>True -- The scores have the same articulations
+False -- The scores do not have the same articulations</pre>
 </div>
 </dd>
 <dt>Raises:</dt>
@@ -164,7 +166,7 @@ False -- The scores do not have the same ornaments</pre>
 <dl class="method">
 <dt id="ScoreDiff.ScoreDiff.have_same_pitches">
 <tt class="descname">have_same_pitches</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_pitches" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the two scores both have the same time pitches at the specified measure and for the specified part</p>
+<dd><p>Checks if the two scores both have the same pitches at the specified measure and for the specified part</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd>msr (int):  the measure number at which to make the comparison
@@ -183,7 +185,7 @@ False -- The scores do not have the same pitches</pre>
 <dl class="method">
 <dt id="ScoreDiff.ScoreDiff.have_same_spanners">
 <tt class="descname">have_same_spanners</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_spanners" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the two scores both have the same spanners at the specified measure and for the specified part</p>
+<dd><p>Checks if the two scores both have the same spanners at the specified measure and for the specified part <a class="footnote-reference" href="#f1" id="id2">[1]</a></p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd>msr (int):  the measure number at which to make the comparison
@@ -228,8 +230,8 @@ False -- The scores do not have the same stem directions</pre>
 part (int): the part for which to make the comparison</dd>
 <dt>Returns:</dt>
 <dd><p class="first">boolean.   The result of the comparison:</p>
-<div class="last highlight-python"><pre>True -- The scores have the same key
-False -- The scores do not have the same key</pre>
+<div class="last highlight-python"><pre>True -- The scores have the same time signature
+False -- The scores do not have the same time signature</pre>
 </div>
 </dd>
 <dt>Raises:</dt>
@@ -257,6 +259,19 @@ False -- The scores do not have the same key</pre>
 <dd><p>Class for handling exceptions while using the ScoreDiff tool</p>
 </dd></dl>
 
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><a class="reference external" href="http://mit.edu/music21/doc/html/moduleSpanner.html">http://mit.edu/music21/doc/html/moduleSpanner.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td><a class="reference external" href="http://mit.edu/music21/doc/html/moduleArticulations.html?highlight=articulation#music21.articulations">http://mit.edu/music21/doc/html/moduleArticulations.html?highlight=articulation#music21.articulations</a></td></tr>
+</tbody>
+</table>
 </div>
 
 

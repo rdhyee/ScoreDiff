@@ -130,10 +130,7 @@ class ScoreDiff:
 
         """
 
-
-
-
-        self.verify_part_number(part)
+	self.verify_part_number(part)
 
         time_signature1 = self.score1.parts[part].measure(msr).timeSignature
         time_signature2 = self.score2.parts[part].measure(msr).timeSignature
@@ -164,9 +161,7 @@ class ScoreDiff:
 
         """
 
-
-        
-        self.verify_part_number(part)
+	self.verify_part_number(part)
 
         pitches1 = self.score1.parts[part].pitches
         pitches2 = self.score2.parts[part].pitches
@@ -193,10 +188,7 @@ class ScoreDiff:
 
         """
 
-
-        
-        
-        self.verify_part_number(part)
+	self.verify_part_number(part)
 
         clef1 = self.score1.parts[part].measure(msr).clef
         clef2 = self.score2.parts[part].measure(msr).clef
@@ -223,11 +215,7 @@ class ScoreDiff:
 
         """
 
-
-        
-        
-        
-        self.verify_part_number(part)
+	self.verify_part_number(part)
 
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
@@ -273,10 +261,7 @@ class ScoreDiff:
 
         """
 
-
-        
-        
-        self.verify_part_number(part)
+	self.verify_part_number(part)
 
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
@@ -308,9 +293,7 @@ class ScoreDiff:
 
         """
 
-
-    
-        self.verify_part_number(part)
+	self.verify_part_number(part)
         
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
@@ -393,9 +376,7 @@ class ScoreDiff:
 
         """
 
-
-        
-        self.verify_part_number(part)
+	self.verify_part_number(part)
         
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
@@ -429,9 +410,7 @@ class ScoreDiff:
 
         """
 
-
-        
-        self.verify_part_number(part)
+	self.verify_part_number(part)
         
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes

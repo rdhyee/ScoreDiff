@@ -142,7 +142,16 @@ class ScoreDiff:
 
         time_signature1 = self.score1.parts[part].measure(msr).timeSignature
         time_signature2 = self.score2.parts[part].measure(msr).timeSignature
-        numerator1 = time_signature1.numerator
+	
+	if(time_signature1 == None and not time_signature2 == None or time_signature2 ==None and not time_signature1 == None):
+
+		return False
+	
+	if(time_signature1 == None and time_signature2 == None):
+		
+		return True
+	
+	numerator1 = time_signature1.numerator
         numerator2 = time_signature2.numerator
         denominator1 = time_signature1.denominator
         denominator2 = time_signature2.denominator

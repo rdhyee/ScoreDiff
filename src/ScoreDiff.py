@@ -13,7 +13,8 @@ from music21.corpus import base
 import math
 
 class ScoreDiff:
-    """
+    """The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
+    to the initialization function, so that the user can detect and display certain differences.
 
     
 
@@ -46,7 +47,6 @@ class ScoreDiff:
         self.name2 = score2
         
            
-       
     def display(self, start_measure=0, end_measure=0):
         """Useful for displaying the differences between the two scores visually
 
@@ -61,165 +61,7 @@ class ScoreDiff:
 
         partial1.show()
         partial2.show()
-        
-           
-    def verify_part_number(self, part):
-        """Checks to make sure the part number a user has entered is not outside of the range that exists for either score
 
-        Args:
-          part (int): The part number to check
-
-        Raises:
-          ScoreException
-
-
-        """
-
-        if (part > len(self.score1.parts)):
-
-            raise ScoreException("part number " + str(part) + " does not exist for " + self.name1)
-
-        if (part > len(self.score2.parts)):
-
-            raise ScoreException("part number " + str(part) + " does not exist for " + self.name2)
-    
-                
-    def have_same_key(self, msr=0, part=0):
-        """Checks if the two scores both are in the same key at the specified measure and for the specified part
-
-        Kwargs:
-          msr (int):  the measure number at which to make the comparison
-          part (int): the part for which to make the comparison
-
-        Returns:
-          boolean.   The result of the comparison::
-
-           True -- The scores have the same key
-           False -- The scores do not have the same key
-
-        Raises:
-          ScoreException
-       
-
-        """
-        
-        self.verify_part_number(part)
-        
-        key_signature1 = self.score1.parts[part].measure(msr).keySignature
-        key_signature2 = self.score2.parts[part].measure(msr).keySignature
-        
-	if(key_signature1 == None and not key_signature2 == None or key_signature2==None and not key_signature1==None):
-		
-		return False
-	
-	elif(key_signature1==None and key_signature2==None):
-		
-		return True
-        
-	return key_signature1.pitchAndMode == key_signature2.pitchAndMode
-
-    def have_same_time_signature(self, msr=0, part=0):
-        """Checks if the two scores both have the same time signature at the specified measure and for the specified part
-
-        Kwargs:
-          msr (int):  the measure number at which to make the comparison
-          part (int): the part for which to make the comparison
-
-        Returns:
-          boolean.   The result of the comparison::
-
-           True -- The scores have the same key
-           False -- The scores do not have the same key
-
-        Raises:
-          ScoreException
-       
-
-        """
-
-	self.verify_part_number(part)
-
-        time_signature1 = self.score1.parts[part].measure(msr).timeSignature
-        time_signature2 = self.score2.parts[part].measure(msr).timeSignature
-	
-	if(time_signature1 == None and not time_signature2 == None or time_signature2 ==None and not time_signature1 == None):
-
-		return False
-	
-	if(time_signature1 == None and time_signature2 == None):
-		
-		return True
-	
-	numerator1 = time_signature1.numerator
-        numerator2 = time_signature2.numerator
-        denominator1 = time_signature1.denominator
-        denominator2 = time_signature2.denominator
-    
-        return numerator1 == numerator2 and denominator1 == denominator2 
-
-              
-    def have_same_pitches(self, msr=0, part=0):
-        """Checks if the two scores both have the same time pitches at the specified measure and for the specified part
-
-        Kwargs:
-          msr (int):  the measure number at which to make the comparison
-          part (int): the part for which to make the comparison
-
-        Returns:
-          boolean.   The result of the comparison::
-
-           True -- The scores have the same pitches
-           False -- The scores do not have the same pitches
-
-        Raises:
-          ScoreException
-       
-
-        """
-
-	self.verify_part_number(part)
-
-        pitches1 = self.score1.parts[part].pitches
-        pitches2 = self.score2.parts[part].pitches
-
-        return pitches1 == pitches2
-
-               
-    def have_same_clef_markings(self, msr=0, part=0):
-        """Checks if the two scores both have the same clef markings at the specified measure and for the specified part
-
-        Kwargs:
-          msr (int):  the measure number at which to make the comparison
-          part (int): the part for which to make the comparison
-
-        Returns:
-          boolean.   The result of the comparison::
-
-           True -- The scores have the same clef markings
-           False -- The scores do not have the same clef markings
-
-        Raises:
-          ScoreException
-       
-
-        """
-
-	self.verify_part_number(part)
-
-        clef1 = self.score1.parts[part].measure(msr).clef
-        clef2 = self.score2.parts[part].measure(msr).clef
-	
-	if(clef1 == None and not clef2 == None or clef2 == None and not clef1 == None):
-
-		return False
-
-	if(clef1 == None and clef2 == None):
-
-		return True
-
-        return clef1.sign == clef2.sign
-    
-              
     def have_same_accidentals(self, msr=0, part=0):
         """Checks if the two scores both have the same accidentals at the specified measure and for the specified part
 
@@ -265,9 +107,40 @@ class ScoreDiff:
         return True
 
                
-    
-    def have_same_stem_directions(self, msr=0, part=0):
-        """Checks if the two scores both have the same stem directions at the specified measure and for the specified part
+    def have_same_articulations(self, msr=0, part=0):
+        """Checks if the two scores both have the same articulations at the specified measure and for the specified part [#f2]_
+	
+	Kwargs:
+          msr (int):  the measure number at which to make the comparison
+          part (int): the part for which to make the comparison
+
+        Returns:
+          boolean.   The result of the comparison::
+
+           True -- The scores have the same articulations
+           False -- The scores do not have the same articulations
+
+        Raises:
+          ScoreException
+       
+
+        """
+
+	self.verify_part_number(part)
+        
+        notes1 = self.score1.parts[part].measure(msr).notes
+        notes2 = self.score2.parts[part].measure(msr).notes
+        
+        for index in range(0, min(len(notes1), len(notes2))):
+            
+            if(notes1[index].articulations != notes2[index].articulations):
+                
+                return False
+            
+        return True
+
+    def have_same_clef_markings(self, msr=0, part=0):
+        """Checks if the two scores both have the same clef markings at the specified measure and for the specified part
 
         Kwargs:
           msr (int):  the measure number at which to make the comparison
@@ -276,8 +149,8 @@ class ScoreDiff:
         Returns:
           boolean.   The result of the comparison::
 
-           True -- The scores have the same stem directions
-           False -- The scores do not have the same stem directions
+           True -- The scores have the same clef markings
+           False -- The scores do not have the same clef markings
 
         Raises:
           ScoreException
@@ -287,17 +160,56 @@ class ScoreDiff:
 
 	self.verify_part_number(part)
 
-        notes1 = self.score1.parts[part].measure(msr).notes
-        notes2 = self.score2.parts[part].measure(msr).notes
+        clef1 = self.score1.parts[part].measure(msr).clef
+        clef2 = self.score2.parts[part].measure(msr).clef
+	
+	if(clef1 == None and not clef2 == None or clef2 == None and not clef1 == None):
+
+		return False
+
+	if(clef1 == None and clef2 == None):
+
+		return True
+
+        return clef1.sign == clef2.sign
+    
+
+    def have_same_key(self, msr=0, part=0):
+        """Checks if the two scores both are in the same key at the specified measure and for the specified part
+
+        Kwargs:
+          msr (int):  the measure number at which to make the comparison
+          part (int): the part for which to make the comparison
+
+        Returns:
+          boolean.   The result of the comparison::
+
+           True -- The scores have the same key
+           False -- The scores do not have the same key
+
+        Raises:
+          ScoreException
+       
+
+        """
         
-        for index in range(0, min(len(notes1), len(notes2))):
+        self.verify_part_number(part)
+        
+        key_signature1 = self.score1.parts[part].measure(msr).keySignature
+        key_signature2 = self.score2.parts[part].measure(msr).keySignature
+        
+	if(key_signature1 == None and not key_signature2 == None or key_signature2==None and not key_signature1==None):
+		
+		return False
+	
+	elif(key_signature1==None and key_signature2==None):
+		
+		return True
+        
+	return key_signature1.pitchAndMode == key_signature2.pitchAndMode
 
-            if(notes1[index].stemDirection != notes2[index].stemDirection):
 
-                return False
 
-        return True
-      
     def have_same_ornaments(self, msr=0, part=0):
         """Checks if the two scores both have the same ornaments at the specified measure and for the specified part
 
@@ -379,12 +291,36 @@ class ScoreDiff:
                     
         return True
     
-         
-       
-    def have_same_spanners(self, msr=0, part=0):
-        """Checks if the two scores both have the same spanners at the specified measure and for the specified part
+    def have_same_pitches(self, msr=0, part=0):
+        """Checks if the two scores both have the same pitches at the specified measure and for the specified part
 
         Kwargs:
+          msr (int):  the measure number at which to make the comparison
+          part (int): the part for which to make the comparison
+
+        Returns:
+          boolean.   The result of the comparison::
+
+           True -- The scores have the same pitches
+           False -- The scores do not have the same pitches
+
+        Raises:
+          ScoreException
+       
+
+        """
+
+	self.verify_part_number(part)
+
+        pitches1 = self.score1.parts[part].pitches
+        pitches2 = self.score2.parts[part].pitches
+
+        return pitches1 == pitches2
+
+    def have_same_spanners(self, msr=0, part=0):
+        """Checks if the two scores both have the same spanners at the specified measure and for the specified part [#f1]_
+	
+	Kwargs:
           msr (int):  the measure number at which to make the comparison
           part (int): the part for which to make the comparison
 
@@ -413,10 +349,8 @@ class ScoreDiff:
             
         return True
 
-               
-            
-    def have_same_articulations(self, msr=0, part=0):
-        """Checks if the two scores both have the same accidentals at the specified measure and for the specified part
+    def have_same_stem_directions(self, msr=0, part=0):
+        """Checks if the two scores both have the same stem directions at the specified measure and for the specified part
 
         Kwargs:
           msr (int):  the measure number at which to make the comparison
@@ -425,8 +359,8 @@ class ScoreDiff:
         Returns:
           boolean.   The result of the comparison::
 
-           True -- The scores have the same accidentals
-           False -- The scores do not have the same accidentals
+           True -- The scores have the same stem directions
+           False -- The scores do not have the same stem directions
 
         Raises:
           ScoreException
@@ -435,19 +369,80 @@ class ScoreDiff:
         """
 
 	self.verify_part_number(part)
-        
+
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
         
         for index in range(0, min(len(notes1), len(notes2))):
-            
-            if(notes1[index].articulations != notes2[index].articulations):
-                
+
+            if(notes1[index].stemDirection != notes2[index].stemDirection):
+
                 return False
-            
+
         return True
-    
+      
+
+    def have_same_time_signature(self, msr=0, part=0):
+        """Checks if the two scores both have the same time signature at the specified measure and for the specified part
+
+        Kwargs:
+          msr (int):  the measure number at which to make the comparison
+          part (int): the part for which to make the comparison
+
+        Returns:
+          boolean.   The result of the comparison::
+
+           True -- The scores have the same time signature
+           False -- The scores do not have the same time signature
+
+        Raises:
+          ScoreException
        
+
+        """
+
+	self.verify_part_number(part)
+
+        time_signature1 = self.score1.parts[part].measure(msr).timeSignature
+        time_signature2 = self.score2.parts[part].measure(msr).timeSignature
+	
+	if(time_signature1 == None and not time_signature2 == None or time_signature2 ==None and not time_signature1 == None):
+
+		return False
+	
+	if(time_signature1 == None and time_signature2 == None):
+		
+		return True
+	
+	numerator1 = time_signature1.numerator
+        numerator2 = time_signature2.numerator
+        denominator1 = time_signature1.denominator
+        denominator2 = time_signature2.denominator
+    
+        return numerator1 == numerator2 and denominator1 == denominator2 
+
+              
+    def verify_part_number(self, part):
+        """Checks to make sure the part number a user has entered is not outside of the range that exists for either score
+
+        Args:
+          part (int): The part number to check
+
+        Raises:
+          ScoreException
+
+
+        """
+
+        if (part > len(self.score1.parts)):
+
+            raise ScoreException("part number " + str(part) + " does not exist for " + self.name1)
+
+        if (part > len(self.score2.parts)):
+
+            raise ScoreException("part number " + str(part) + " does not exist for " + self.name2)
+    
+                
 class ScoreException(Exception):
 	"""Class for handling exceptions while using the ScoreDiff tool
 
@@ -469,4 +464,14 @@ class ScoreException(Exception):
 
 		"""
 		return repr(self.value)
-	
+
+"""
+
+.. rubric:: Footnotes
+
+.. [#f1] http://mit.edu/music21/doc/html/moduleArticulations.html?highlight=articulation#music21.articulations
+
+.. [#f2] http://mit.edu/music21/doc/html/moduleSpanner.html
+
+"""
+

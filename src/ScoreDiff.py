@@ -10,7 +10,6 @@
 
 import music21.environment
 from music21.corpus import base
-from ScoreException import *
 import math
 
 class ScoreDiff:
@@ -449,5 +448,25 @@ class ScoreDiff:
         return True
     
        
+class ScoreException(Exception):
+	"""Class for handling exceptions while using the ScoreDiff tool
 
 
+	"""
+        def __init__(self , value):
+		"""Initializes the ScoreException object
+
+		Args:
+		 value (str): An error message
+
+		"""
+		self.value = value
+
+	def __str__(self):
+		"""Function for fetching this object's error message
+		Returns:
+		 This object's error message
+
+		"""
+		return repr(self.value)
+	

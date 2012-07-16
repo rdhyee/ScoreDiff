@@ -84,7 +84,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_number(part)
+	self.verify_part_and_measure(part, msr)
 
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
@@ -130,7 +130,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_number(part)
+	self.verify_part_and_measure(part, msr)
         
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
@@ -163,7 +163,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_number(part)
+	self.verify_part_and_measure(part, msr)
 
         clef1 = self.score1.parts[part].measure(msr).clef
         clef2 = self.score2.parts[part].measure(msr).clef
@@ -199,10 +199,10 @@ class ScoreDiff:
 
         """
         
-        self.verify_part_number(part)
+        self.verify_part_and_measure(part, msr)
         
-        key_signature1 = self.score1.parts[part].measure(msr).keySignature
-        key_signature2 = self.score2.parts[part].measure(msr).keySignature
+        key_signature1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature
+        key_signature2 = self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature
         
 	if(key_signature1 == None and not key_signature2 == None or key_signature2==None and not key_signature1==None):
 		
@@ -236,7 +236,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_number(part)
+	self.verify_part_and_measure(part, msr)
         
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
@@ -318,7 +318,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_number(part)
+	self.verify_part_and_measure(part, msr)
 
         pitches1 = self.score1.parts[part].pitches
         pitches2 = self.score2.parts[part].pitches
@@ -345,7 +345,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_number(part)
+	self.verify_part_and_measure(part, msr)
         
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
@@ -378,7 +378,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_number(part)
+	self.verify_part_and_measure(part, msr)
 
         notes1 = self.score1.parts[part].measure(msr).notes
         notes2 = self.score2.parts[part].measure(msr).notes
@@ -412,7 +412,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_number(part)
+	self.verify_part_and_measure(part, msr)
 
         time_signature1 = self.score1.parts[part].measure(msr).timeSignature
         time_signature2 = self.score2.parts[part].measure(msr).timeSignature
@@ -433,11 +433,13 @@ class ScoreDiff:
         return numerator1 == numerator2 and denominator1 == denominator2 
 
               
-    def verify_part_number(self, part):
-        """Checks to make sure the part number a user has entered is not outside of the range that exists for either score
+    def verify_part_and_measure(self, part, msr):
+        """Checks to make sure the part and measure numbers a user has entered are not outside of the range that exists for either score
 
         Args:
           part (int): The part number to check
+
+	  msr (int): The measure number to check
 
         Raises:
           ScoreException
@@ -445,15 +447,24 @@ class ScoreDiff:
 
         """
 
-        if (part > len(self.score1.parts)):
+        if (part > len(self.score1.parts) or part < 0):
 
             raise ScoreException("part number " + str(part) + " does not exist for " + self.name1)
 
-        if (part > len(self.score2.parts)):
+        if (part > len(self.score2.parts) or part < 0):
 
             raise ScoreException("part number " + str(part) + " does not exist for " + self.name2)
-    
-                
+
+        if (msr > len(self.score1.parts[part].getElementsByClass('Measure').elements) or msr < 0):
+
+		raise ScoreException("measure number "+str(msr) + "does not exist for "+self.name1)
+
+	if (msr > len(self.score2.parts[part].getElementsByClass('Measure').elements) or msr < 0):
+		
+		raise ScoreException("measure number "+str(msr) + "does not exist for "+self.name2)
+
+	
+
 class ScoreException(Exception):
 	"""Class for handling exceptions while using the ScoreDiff tool
 

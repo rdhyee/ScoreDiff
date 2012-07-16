@@ -86,8 +86,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(part, msr)
 
-        notes1 = self.score1.parts[part].measure(msr).notes
-        notes2 = self.score2.parts[part].measure(msr).notes
+        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
+        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
 
         for index in range(0, min(len(notes1), len(notes2))):
 
@@ -132,8 +132,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(part, msr)
         
-        notes1 = self.score1.parts[part].measure(msr).notes
-        notes2 = self.score2.parts[part].measure(msr).notes
+        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
+        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
         
         for index in range(0, min(len(notes1), len(notes2))):
             
@@ -165,8 +165,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(part, msr)
 
-        clef1 = self.score1.parts[part].measure(msr).clef
-        clef2 = self.score2.parts[part].measure(msr).clef
+        clef1 = self.score1.parts[part].getElementsByClass('Measure')[msr].clef
+        clef2 = self.score2.parts[part].getElementsByClass('Measure')[msr].clef
 	
 	if(clef1 == None and not clef2 == None or clef2 == None and not clef1 == None):
 
@@ -238,8 +238,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(part, msr)
         
-        notes1 = self.score1.parts[part].measure(msr).notes
-        notes2 = self.score2.parts[part].measure(msr).notes
+        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
+        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
         
         for index in range(0, min(len(notes1), len(notes2))):
             
@@ -347,8 +347,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(part, msr)
         
-        notes1 = self.score1.parts[part].measure(msr).notes
-        notes2 = self.score2.parts[part].measure(msr).notes
+        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
+        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
         
         for index in range(0, min(len(notes1), len(notes2))):
             
@@ -380,8 +380,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(part, msr)
 
-        notes1 = self.score1.parts[part].measure(msr).notes
-        notes2 = self.score2.parts[part].measure(msr).notes
+        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
+        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
         
         for index in range(0, min(len(notes1), len(notes2))):
 
@@ -414,8 +414,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(part, msr)
 
-        time_signature1 = self.score1.parts[part].measure(msr).timeSignature
-        time_signature2 = self.score2.parts[part].measure(msr).timeSignature
+        time_signature1 = self.score1.parts[part].getElementsByClass('Measure')[msr].timeSignature
+        time_signature2 = self.score2.parts[part].getElementsByClass('Measure')[msr].timeSignature
 	
 	if(time_signature1 == None and not time_signature2 == None or time_signature2 ==None and not time_signature1 == None):
 

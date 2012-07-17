@@ -49,6 +49,9 @@ def test_time_signature(score1, score2, measure = 0, part = 0):
 	   >>> test_time_signature('bwv66.6.mxl', 'different_time3.mxl', 4)
 	   False
 
+	   >>> test_time_signature('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
+	   False
+
 	   
 	"""
 
@@ -80,6 +83,10 @@ def test_clef(score1, score2, measure = 0, part = 0):
 	   >>> test_clef('bwv66.6.mxl', 'different_clef3.mxl')
 	   True
 
+	   >>> test_clef('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
+	   True
+	   
+
 
 
 
@@ -109,6 +116,9 @@ def test_pitches(score1, score2, measure = 0, part = 0):
 	   >>> test_pitches('bwv66.6.mxl', 'different_pitches3.mxl', 3)
 	   False
 
+	   >>> test_pitches('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
+	   False
+
 
 	"""
 
@@ -131,6 +141,9 @@ def test_ornaments(score1, score2, measure = 0, part = 0):
 	   True
 
 	   >>> test_ornaments('bwv66.6.mxl', 'different_key.mxl')
+	   True
+
+	   >>> test_ornaments('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
 	   True
 
 	"""
@@ -159,6 +172,9 @@ def test_accidentals(score1, score2, measure = 0, part = 0):
 	   >>> test_accidentals('bwv66.6.mxl', 'different_pitches.mxl')
 	   True
 
+	   >>> test_accidentals('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
+	   True
+
 	  
 	"""
 	diff = ScoreDiff(score1, score2, path)
@@ -185,6 +201,10 @@ def test_stem_directions(score1, score2, measure = 0, part = 0):
 	   >>> test_stem_directions('bwv66.6.mxl', 'different_pitches.mxl')
 	   True
 
+	   >>> test_stem_directions('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
+	   False
+
+	  
 	"""
 
 	diff = ScoreDiff(score1, score2, path)
@@ -202,6 +222,8 @@ def test_spanners(score1, score2, measure = 0, part = 0):
 
 	   >>> test_spanners('bwv66.6.mxl', 'different_pitches.mxl')
 	   True
+
+	   
 
 	"""
 

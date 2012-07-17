@@ -301,8 +301,11 @@ class ScoreDiff:
     
     def have_same_pitches(self, msr=0, part=0):
         """Checks if the two scores both have the same pitches at the specified measure and for the specified part
+	
+	.. note:: This function will compares pitches in the order that they occur.  To compare without considering order, use have_same_pitches_ignore_order.
 
-        Kwargs:
+        
+	Kwargs:
           msr (int):  the measure number at which to make the comparison
           
 	  part (int): the part for which to make the comparison
@@ -321,10 +324,41 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(msr, part)
 
-        pitches1 = sorted(self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches)
+        pitches1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches
+        pitches2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches
+
+        return pitches1 == pitches2
+
+    def have_same_pitches_ignore_order(self, msr=0, part=0):
+        """Checks if the two scores both have the same pitches at the specified measure and for the specified part
+
+        .. note:: This function will determine if the same pitches are present without considering the order in which they appear.
+
+        Kwargs:
+          msr (int): the measure number at which to make the comparison
+
+	  part (int): the part for which to make the comparison
+
+        Returns:
+          boolean.  The result of the comparison::
+
+	    True -- The scores have the same pitches
+	    False -- The scores do not have the same pitches
+
+        Raises:
+	   ScoreException
+
+	"""
+
+	self.verify_part_and_measure(msr, part)
+
+	pitches1 = sorted(self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches)
         pitches2 = sorted(self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches)
 
         return pitches1 == pitches2
+	
+
+
 
     def have_same_spanners(self, msr=0, part=0):
         """Checks if the two scores both have the same spanners at the specified measure and for the specified part [#f1]_

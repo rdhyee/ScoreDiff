@@ -381,17 +381,38 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(msr, part)
 
-        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
-        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
+        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
+        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
+        stems1=[]
+	stems2=[]
         
-        for index in range(0, min(len(notes1), len(notes2))):
+	for index in range(0, min(len(notes1), len(notes2))):
 
-            if(notes1[index].stemDirection != notes2[index].stemDirection):
+		if(notes1[index].isChord):
+			
+			for pitch in notes1[index].pitches:
 
-                return False
+				stems1+=[notes1[index].getStemDirection(pitch)]
+		else:
+			
+			stems1+=notes1[index].stemDirection
+
+		if(notes2[index].isChord):
+
+			for pitch in notes2[index].pitches:
+
+				stems2+=[notes2[index].getStemDirection(pitch)]
+		else:
+
+			stems2+=notes2[index].stemDirection
+
+		if (stems1 != stems2):
+
+			return False
 
         return True
       
+   	
 
     def have_same_time_signature(self, msr=0, part=0):
         """Checks if the two scores both have the same time signature at the specified measure and for the specified part

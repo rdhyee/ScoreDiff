@@ -36,7 +36,7 @@ class ScoreDiff:
 	 score2 (str):  The pathname of a score to parse and compare to score1
 
         Kwargs:
-         localCorpusPath (str)  A path to a corpus if your files are located elswhere
+         localCorpusPath (str)  A path to a corpus if your files are located elsewhere
 
 
         """
@@ -321,8 +321,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(msr, part)
 
-        pitches1 = self.score1.parts[part].pitches
-        pitches2 = self.score2.parts[part].pitches
+        pitches1 = sorted(self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches)
+        pitches2 = sorted(self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches)
 
         return pitches1 == pitches2
 

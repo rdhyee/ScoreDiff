@@ -173,6 +173,10 @@ False -- The scores do not have the same ornaments</pre>
 <dt id="ScoreDiff.ScoreDiff.have_same_pitches">
 <tt class="descname">have_same_pitches</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_pitches" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the two scores both have the same pitches at the specified measure and for the specified part</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function will compares pitches in the order that they occur.  To compare without considering order, use have_same_pitches_ignore_order.</p>
+</div>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd><p class="first">msr (int):  the measure number at which to make the comparison</p>
@@ -180,6 +184,30 @@ False -- The scores do not have the same ornaments</pre>
 </dd>
 <dt>Returns:</dt>
 <dd><p class="first">boolean.   The result of the comparison:</p>
+<div class="last highlight-python"><pre>True -- The scores have the same pitches
+False -- The scores do not have the same pitches</pre>
+</div>
+</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ScoreDiff.ScoreDiff.have_same_pitches_ignore_order">
+<tt class="descname">have_same_pitches_ignore_order</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.have_same_pitches_ignore_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the two scores both have the same pitches at the specified measure and for the specified part</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function will determine if the same pitches are present without considering the order in which they appear.</p>
+</div>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">msr (int): the measure number at which to make the comparison</p>
+<p class="last">part (int): the part for which to make the comparison</p>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">boolean.  The result of the comparison:</p>
 <div class="last highlight-python"><pre>True -- The scores have the same pitches
 False -- The scores do not have the same pitches</pre>
 </div>

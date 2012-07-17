@@ -395,7 +395,7 @@ class ScoreDiff:
 				stems1+=[notes1[index].getStemDirection(pitch)]
 		else:
 			
-			stems1+=notes1[index].stemDirection
+			stems1+=[notes1[index].stemDirection]
 
 		if(notes2[index].isChord):
 
@@ -404,7 +404,7 @@ class ScoreDiff:
 				stems2+=[notes2[index].getStemDirection(pitch)]
 		else:
 
-			stems2+=notes2[index].stemDirection
+			stems2+=[notes2[index].stemDirection]
 
 		if (stems1 != stems2):
 

@@ -59,12 +59,12 @@
 to the initialization function, so that the user can detect and display certain differences.</p>
 <dl class="method">
 <dt id="ScoreDiff.ScoreDiff.display">
-<tt class="descname">display</tt><big>(</big><em>start_measure=0</em>, <em>end_measure=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.display" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">display</tt><big>(</big><em>msr=0</em>, <em>part=0</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.display" title="Permalink to this definition">¶</a></dt>
 <dd><p>Useful for displaying the differences between the two scores visually</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
-<dd><p class="first">start_measure (int): A measure number to start from</p>
-<p class="last">end_measure (int):  A measure number to end at.</p>
+<dd><p class="first">msr (int): A measure number to display</p>
+<p class="last">part (int): A part number to examine.  If not specified then all parts are displayed</p>
 </dd>
 </dl>
 </dd></dl>
@@ -250,8 +250,20 @@ False -- The scores do not have the same time signature</pre>
 </dd></dl>
 
 <dl class="method">
+<dt id="ScoreDiff.ScoreDiff.verify_part">
+<tt class="descname">verify_part</tt><big>(</big><em>part</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.verify_part" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks to make sure the part number a user has entered is not outside the range that exists for either score</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>part (int): The part number to check</dd>
+<dt>Raises:</dt>
+<dd>ScoreException</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="ScoreDiff.ScoreDiff.verify_part_and_measure">
-<tt class="descname">verify_part_and_measure</tt><big>(</big><em>part</em>, <em>msr</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.verify_part_and_measure" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">verify_part_and_measure</tt><big>(</big><em>msr</em>, <em>part</em><big>)</big><a class="headerlink" href="#ScoreDiff.ScoreDiff.verify_part_and_measure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks to make sure the part and measure numbers a user has entered are not outside of the range that exists for either score</p>
 <dl class="docutils">
 <dt>Args:</dt>

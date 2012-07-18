@@ -387,50 +387,53 @@ class ScoreDiff:
 
 	spanners1=[]
 	spanners2=[]
-        
-        for index in range(0, min(len(notes1), len(notes2))):
-            
-        	if(notes1[index].isChord):
+
+	for index in range(0, min(len(notes1), len(notes2))):
+
+		if(notes1[index].isChord):
 
 			for pitch in notes1[index].pitches:
-				
+
 				found = [x for x in pitch.getSpannerSites() if x != []]
-				
+
 				if(found != []):
-					
-					spanners1+=[found]
-		
+
+					spanners1+=found
+					spanners1 = list(set(spanners1))
+
 		else:
-			
+
 			found = notes1[index].getSpannerSites()
-			
+
 			if(found != []):
-				
-				spanners1+=[found]
+
+				spanners1+=found
+
+	
+
+	for index in range(0, min(len(notes1), len(notes2))):
 
 		if(notes2[index].isChord):
-			
+
 			for pitch in notes2[index].pitches:
-				
-				found = [x for x in pitch.getSpannerSites() if x!= []]
-				
+
+				found = [x for x in pitch.getSpannerSites() if x != []]
+
 				if(found != []):
-					
-					spanners2+=[found]
+
+					spanners2+=found
+					spanners2 = list(set(spanners2))
 
 		else:
-			
-			found = notes2[index].getSpannerSites()
-			
-			if(found != []):
-				
-				spanners2+=[found]
 
-		if (spanners1 != spanners2):
-			
-			return False
-   
-        return True
+			found = notes2[index].getSpannerSites()
+
+			if(found != []):
+
+				spanners2+=found
+	
+
+        return spanners1==spanners2
 
     def have_same_stem_directions(self, msr=0, part=0):
         """Checks if the two scores both have the same stem directions at the specified measure and for the specified part
@@ -462,30 +465,31 @@ class ScoreDiff:
 	for index in range(0, min(len(notes1), len(notes2))):
 
 		if(notes1[index].isChord):
-			
+
 			for pitch in notes1[index].pitches:
 
 				stems1+=[notes1[index].getStemDirection(pitch)]
-				stems1=list(set(stems1))
-		else:
+				stems1 = list(set(stems1))
 			
+		else:
+
 			stems1+=[notes1[index].stemDirection]
+	
+	
+	for index in range(0, min(len(notes1), len(notes2))):
 
 		if(notes2[index].isChord):
 
 			for pitch in notes2[index].pitches:
 
 				stems2+=[notes2[index].getStemDirection(pitch)]
-				stems2=list(set(stems2))
+				stems2 = list(set(stems2))			
+
 		else:
 
 			stems2+=[notes2[index].stemDirection]
-
-		if (stems1 != stems2):
-
-			return False
-
-        return True
+			
+        return stems1==stems2
       
    	
 

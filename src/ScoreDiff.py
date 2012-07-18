@@ -399,7 +399,8 @@ class ScoreDiff:
 				if(found != []):
 
 					spanners1+=found
-					spanners1 = list(set(spanners1))
+
+			spanners1 = list(set(spanners1))
 
 		else:
 
@@ -422,7 +423,8 @@ class ScoreDiff:
 				if(found != []):
 
 					spanners2+=found
-					spanners2 = list(set(spanners2))
+
+			spanners2 = list(set(spanners2))
 
 		else:
 
@@ -469,7 +471,8 @@ class ScoreDiff:
 			for pitch in notes1[index].pitches:
 
 				stems1+=[notes1[index].getStemDirection(pitch)]
-				stems1 = list(set(stems1))
+
+			stems1 = list(set(stems1))
 			
 		else:
 
@@ -483,7 +486,8 @@ class ScoreDiff:
 			for pitch in notes2[index].pitches:
 
 				stems2+=[notes2[index].getStemDirection(pitch)]
-				stems2 = list(set(stems2))			
+
+			stems2 = list(set(stems2))
 
 		else:
 

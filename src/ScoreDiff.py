@@ -382,15 +382,54 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(msr, part)
         
-        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
-        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
+        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
+        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
+
+	spanners1=[]
+	spanners2=[]
         
         for index in range(0, min(len(notes1), len(notes2))):
             
-            if(notes1[index].getSpannerSites() != notes2[index].getSpannerSites()):
-                
-                return False
-            
+        	if(notes1[index].isChord):
+
+			for pitch in notes1[index].pitches:
+				
+				found = [x for x in pitch.getSpannerSites() if x != []]
+				
+				if(found != []):
+					
+					spanners1+=[found]
+		
+		else:
+			
+			found = notes1[index].getSpannerSites()
+			
+			if(found != []):
+				
+				spanners1+=[found]
+
+		if(notes2[index].isChord):
+			
+			for pitch in notes2[index].pitches:
+				
+				found = [x for x in pitch.getSpannerSites() if x!= []]
+				
+				if(found != []):
+					
+					spanners2+=[found]
+
+		else:
+			
+			found = notes2[index].getSpannerSites()
+			
+			if(found != []):
+				
+				spanners2+=[found]
+
+		if (spanners1 != spanners2):
+			
+			return False
+   
         return True
 
     def have_same_stem_directions(self, msr=0, part=0):
@@ -427,6 +466,7 @@ class ScoreDiff:
 			for pitch in notes1[index].pitches:
 
 				stems1+=[notes1[index].getStemDirection(pitch)]
+				stems1=list(set(stems1))
 		else:
 			
 			stems1+=[notes1[index].stemDirection]
@@ -436,6 +476,7 @@ class ScoreDiff:
 			for pitch in notes2[index].pitches:
 
 				stems2+=[notes2[index].getStemDirection(pitch)]
+				stems2=list(set(stems2))
 		else:
 
 			stems2+=[notes2[index].stemDirection]

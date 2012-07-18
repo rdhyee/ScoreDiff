@@ -223,6 +223,9 @@ def test_spanners(score1, score2, measure = 0, part = 0):
 	   >>> test_spanners('bwv66.6.mxl', 'different_pitches.mxl')
 	   True
 
+	   >>> test_spanners('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
+	   True
+
 	   
 
 	"""

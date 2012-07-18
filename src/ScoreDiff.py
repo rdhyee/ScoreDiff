@@ -38,12 +38,12 @@ class ScoreDiff:
         Kwargs:
          localCorpusPath (str)  A path to a corpus if your files are located elsewhere
 
-
+	 
         """
            
         music21.environment.set('localCorpusPath', localCorpusPath)
         self.score1 = base.parse(score1)
-        self.score2 = base.parse(score2)
+       	self.score2 = base.parse(score2)
         self.name1 = score1
         self.name2 = score2
         
@@ -58,7 +58,7 @@ class ScoreDiff:
           
 	  
         """
-	self.verify_part_and_measure(msr, part)	
+	self.__verify_part_and_measure__(msr, part)	
 	
 	partial1 = self.score1.parts[part].getElementsByClass('Measure')[msr]
 	partial2 = self.score2.parts[part].getElementsByClass('Measure')[msr]
@@ -85,30 +85,46 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(msr, part)
+	self.__verify_part_and_measure__(msr, part)
 
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
 
+	accidentals1 = []
+	accidentals2 = []
+
+	altered1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
+	altered2 = self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
+
         for index in range(0, min(len(notes1), len(notes2))):
 
-            if(notes1[index].pitch.accidental is None and not (notes2[index].pitch.accidental is None)):
-                
-                return False
-            
-            elif(notes2[index].pitch.accidental is None and not(notes1[index].pitch.accidental is None)):
+        	if(notes1[index].isChord):
 
-                return False
+			for pitch in notes1[index].pitches:
 
-            elif(notes1[index].pitch.accidental is None and  notes2[index].pitch.accidental is None):
+				if(not pitch.accidental is None and not pitch.name in altered1):
 
-                continue
-            
-            elif(notes1[index].pitch.accidental.fullName != notes2[index].pitch.accidental.fullName):
+					accidentals1.append(pitch.accidental)
 
-                return False
+		elif(not notes1[index].accidental is None and not notes1[index].name in altered1):
 
-        return True
+			accidentals1.append(notes1[index].accidental)
+            		
+		if(notes2[index].isChord):
+
+			for  pitch in notes2[index].pitches:
+
+				if(not pitch.accidental is None and not pitch.name in altered2):
+
+					accidentals2.append(pitch.accidental)
+
+		elif(not notes2[index].accidental is None and not notes2[index].name in altered2):
+
+			accidentals2.append(notes2[index].accidental)
+
+
+
+	return accidentals1 == accidentals2
 
                
     def have_same_articulations(self, msr=0, part=0):
@@ -131,7 +147,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(msr, part)
+	self.__verify_part_and_measure__(msr, part)
         
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
@@ -164,7 +180,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(msr, part)
+	self.__verify_part_and_measure__(msr, part)
 
         clef1 = self.score1.parts[part].getElementsByClass('Measure')[msr].clef
         clef2 = self.score2.parts[part].getElementsByClass('Measure')[msr].clef
@@ -200,7 +216,7 @@ class ScoreDiff:
 
         """
         
-        self.verify_part_and_measure(msr, part)
+        self.__verify_part_and_measure__(msr, part)
         
         key_signature1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature
         key_signature2 = self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature
@@ -237,7 +253,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(msr, part)
+	self.__verify_part_and_measure__(msr, part)
         
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
@@ -322,7 +338,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(msr, part)
+	self.__verify_part_and_measure__(msr, part)
 
         pitches1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches
         pitches2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches
@@ -350,7 +366,7 @@ class ScoreDiff:
 
 	"""
 
-	self.verify_part_and_measure(msr, part)
+	self.__verify_part_and_measure__(msr, part)
 
 	pitches1 = sorted(self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches)
         pitches2 = sorted(self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches)
@@ -380,7 +396,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(msr, part)
+	self.__verify_part_and_measure__(msr, part)
         
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
@@ -395,7 +411,6 @@ class ScoreDiff:
 			for pitch in notes1[index].pitches:
 
 				spanners1 += pitch.getSpannerSites()
-
 
 		else:
 
@@ -434,7 +449,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(msr, part)
+	self.__verify_part_and_measure__(msr, part)
 
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
@@ -492,7 +507,7 @@ class ScoreDiff:
 
         """
 
-	self.verify_part_and_measure(msr, part)
+	self.__verify_part_and_measure__(msr, part)
 
         time_signature1 = self.score1.parts[part].getElementsByClass('Measure')[msr].timeSignature
         time_signature2 = self.score2.parts[part].getElementsByClass('Measure')[msr].timeSignature
@@ -526,7 +541,7 @@ class ScoreDiff:
 
 
         """
-	self.verify_part(part)
+	self.__verify_part__(part)
 
 	if (msr >= len(self.score1.parts[part].getElementsByClass('Measure').elements) or msr < 0):
 

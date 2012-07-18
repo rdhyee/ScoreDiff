@@ -396,7 +396,6 @@ class ScoreDiff:
 
 				spanners1 += pitch.getSpannerSites()
 
-			spanners1 = list(set(spanners1))
 
 		else:
 
@@ -416,7 +415,6 @@ class ScoreDiff:
 
 				spanners2 += pitch.getSpannerSites()
 
-			spanners2 = list(set(spanners2))
 
 		else:
 

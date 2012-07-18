@@ -394,7 +394,7 @@ class ScoreDiff:
 
 			for pitch in notes1[index].pitches:
 
-				found = [x for x in pitch.getSpannerSites() if x != []]
+				found = [x for x in pitch.getSpannerSites()]
 
 				if(found != []):
 
@@ -418,7 +418,7 @@ class ScoreDiff:
 
 			for pitch in notes2[index].pitches:
 
-				found = [x for x in pitch.getSpannerSites() if x != []]
+				found = [x for x in pitch.getSpannerSites()]
 
 				if(found != []):
 

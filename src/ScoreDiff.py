@@ -394,7 +394,7 @@ class ScoreDiff:
 
 			for pitch in notes1[index].pitches:
 
-				spanners1 += [x for x in pitch.getSpannerSites()]
+				spanners1 += pitch.getSpannerSites()
 
 			spanners1 = list(set(spanners1))
 
@@ -414,7 +414,7 @@ class ScoreDiff:
 
 			for pitch in notes2[index].pitches:
 
-				spanners2 += [x for x in pitch.getSpannerSites()]
+				spanners2 += pitch.getSpannerSites()
 
 			spanners2 = list(set(spanners2))
 

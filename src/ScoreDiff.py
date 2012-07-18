@@ -87,8 +87,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(msr, part)
 
-        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
-        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
+        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
+        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
 
         for index in range(0, min(len(notes1), len(notes2))):
 
@@ -133,8 +133,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(msr, part)
         
-        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
-        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
+        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
+        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
         
         for index in range(0, min(len(notes1), len(notes2))):
             
@@ -239,8 +239,8 @@ class ScoreDiff:
 
 	self.verify_part_and_measure(msr, part)
         
-        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].notes
-        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].notes
+        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
+        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
         
         for index in range(0, min(len(notes1), len(notes2))):
             
@@ -519,7 +519,7 @@ class ScoreDiff:
         return numerator1 == numerator2 and denominator1 == denominator2 
 
               
-    def verify_part_and_measure(self, msr, part):
+    def __verify_part_and_measure__(self, msr, part):
         """Checks to make sure the part and measure numbers a user has entered are not outside of the range that exists for either score
 
         Args:
@@ -543,7 +543,7 @@ class ScoreDiff:
 		raise ScoreException("measure number "+str(msr) + "does not exist for "+self.name2)
 
 
-    def verify_part(self, part):
+    def __verify_part__(self, part):
         """Checks to make sure the part number a user has entered is not outside the range that exists for either score
 
 	Args:

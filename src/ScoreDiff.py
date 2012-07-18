@@ -361,7 +361,7 @@ class ScoreDiff:
 
 
     def have_same_spanners(self, msr=0, part=0):
-        """Checks if the two scores both have the same spanners at the specified measure and for the specified part [#f1]_
+        """Checks if the two scores both have the same spanner sites at the specified measure and for the specified part [#f1]_
 	
 	Kwargs:
           msr (int):  the measure number at which to make the comparison
@@ -401,18 +401,13 @@ class ScoreDiff:
 
 			spanners1 += notes1[index].getSpannerSites()
 
-	
-
 		if(notes2[index].isChord):
 
 			for pitch in notes2[index].pitches:
 
 				spanners2 += pitch.getSpannerSites()
 
-
 		else:
-
-
 
 			spanners2 += notes2[index].getSpannerSites()
 	
@@ -460,7 +455,6 @@ class ScoreDiff:
 		else:
 
 			stems1+=[notes1[index].stemDirection]
-	
 	
 		if(notes2[index].isChord):
 

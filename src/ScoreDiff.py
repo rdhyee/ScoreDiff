@@ -112,6 +112,10 @@ class ScoreDiff:
 		altered1 = key_map[current].alteredPitches
 		altered1 = [x.name for x in altered1]
 		
+	else:
+
+		altered1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
+		altered1 = [x.name for x in altered1]
 
 	if(self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature == None):
 		
@@ -129,9 +133,7 @@ class ScoreDiff:
 		altered2 = [x.name for x in altered2]
 	else:
 		
-		altered1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
 		altered2 = self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
-		altered1 = [x.name for x in altered1]
 		altered2 = [x.name for x in altered2]
 
         for index in range(0, min(len(notes1), len(notes2))):

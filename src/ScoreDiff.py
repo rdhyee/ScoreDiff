@@ -90,18 +90,20 @@ class ScoreDiff:
 
 	self.__verify_part_and_measure__(msr, part)
 
-        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
-        notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
+        measures1 = self.score1.parts[part].getElementsByClass('Measure')
+	measures2 = self.score2.parts[part].getElementsByClass('Measure')
+	notes1 = measures1[msr].flat.notes
+        notes2 = measures2[msr].flat.notes
 	
 		
 	accidentals1 = []
 	accidentals2 = []
 
-	if(self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature == None):
+	if(measures1[msr].keySignature == None):
 		
 		keys = self.score1.parts[part].flat.getKeySignatures()
 		current = 0
-		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+		target_measure = measures1[msr].notes[0].measureNumber
 
 		for key in keys:
 
@@ -114,14 +116,14 @@ class ScoreDiff:
 		
 	else:
 
-		altered1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
+		altered1 = measures1[msr].keySignature.alteredPitches
 		altered1 = [x.name for x in altered1]
 
-	if(self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature == None):
+	if(measures2[msr].keySignature == None):
 		
 		keys = self.score2.parts[part].flat.getKeySignatures()
 		current = 0
-		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+		target_measure = measures2[msr].notes[0].measureNumber
 
 		for key in keys:
 
@@ -133,7 +135,7 @@ class ScoreDiff:
 		altered2 = [x.name for x in altered2]
 	else:
 		
-		altered2 = self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
+		altered2 = measures2[msr].keySignature.alteredPitches
 		altered2 = [x.name for x in altered2]
 
         for index in range(0, min(len(notes1), len(notes2))):
@@ -187,7 +189,8 @@ class ScoreDiff:
 
 	self.__verify_part_and_measure__(msr, part)
         
-        notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
+        
+	notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
         
         for index in range(0, min(len(notes1), len(notes2))):
@@ -256,15 +259,18 @@ class ScoreDiff:
         
         self.__verify_part_and_measure__(msr, part)
         
-        key_signature1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature
-        key_signature2 = self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature
+        
+	measures1 = self.score1.parts[part].getElementsByClass('Measure')
+	measures2 = self.score2.parts[part].getElementsByClass('Measure')
+	key_signature1 = measures1[msr].keySignature
+        key_signature2 = measures2[msr].keySignature
 
 	if(key_signature1 == None):
 
 		keys = self.score1.parts[part].flat.getKeySignatures()
 
 		current = 0
-		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+		target_measure = measures1[msr].notes[0].measureNumber
 
 		for key in keys:
 
@@ -279,7 +285,7 @@ class ScoreDiff:
 		keys = self.score2.parts[part].flat.getKeySignatures()
 
 		current = 0
-		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+		target_measure = measures2[msr].notes[0].measureNumber
 
 		for key in keys():
 

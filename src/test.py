@@ -26,6 +26,13 @@ def test_key(score1, score2, measure=0, part=0):
 	   >>> test_key('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
 	   False
 
+	   >>> test_key('scriabin_opus_2_no1.mxl', 'scriabin_opus_8_no5.mxl')
+	   True
+
+	   >>> test_key('bwv66.6.mxl', 'scriabin_opus_8_no5.mxl')
+	   False
+
+
 	"""
 
 	diff = ScoreDiff(score1, score2, path)
@@ -51,6 +58,12 @@ def test_time_signature(score1, score2, measure = 0, part = 0):
 
 	   >>> test_time_signature('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
 	   False
+
+	   >>> test_time_signature('scriabin_opus_2_no1.mxl', 'scriabin_opus_8_no5.mxl')
+	   False
+
+	   >>> test_time_signature('bwv66.6.mxl', 'scriabin_opus_8_no5.mxl')
+	   True
 
 	   
 	"""
@@ -119,6 +132,12 @@ def test_pitches(score1, score2, measure = 0, part = 0):
 	   >>> test_pitches('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
 	   False
 
+	   >>> test_pitches('bwv66.6.mxl', 'scriabin_opus_8_no5.mxl')
+	   False
+
+	   >>> test_pitches('scriabin_opus_2_no1.mxl', 'scriabin_opus_8_no5.mxl')
+	   False
+
 
 	"""
 
@@ -144,6 +163,9 @@ def test_ornaments(score1, score2, measure = 0, part = 0):
 	   True
 
 	   >>> test_ornaments('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
+	   True
+
+	   >>> test_ornaments('scriabin_opus_2_no1.mxl', 'scriabin_opus_8_no5.mxl')
 	   True
 
 	"""
@@ -226,12 +248,43 @@ def test_spanners(score1, score2, measure = 0, part = 0):
 	   >>> test_spanners('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
 	   True
 
+	   >>> test_spanners('bwv66.6.mxl', 'scriabin_opus_8_no5.mxl')
+	   True
+
+	   >>> test_spanners('bwv66.6.mxl', 'scriabin_opus_8_no5.mxl')
+	   True
+
 	   
 
 	"""
 
 	diff = ScoreDiff(score1, score2, path)
 	return diff.have_same_spanners(measure, part)
+
+def test_articulations(score1, score2, measure = 0, part = 0):
+
+	"""
+	   >>> test_articulations('bwv66.6.mxl', 'different_articulations.mxl')
+	   False
+
+	   >>> test_articulations('bwv66.6.mxl', 'different_ornaments.mxl')
+	   True
+
+	   >>> test_articulations('bwv66.6.mxl', 'different_pitches.mxl')
+	   True
+
+	   >>> test_articulations('scriabin_opus_2_no1.mxl', 'bwv66.6.mxl')
+	   True
+
+	   >>> test_articulations('scriabin_opus_2_no1.mxl', 'scriabin_opus_8_no5.mxl')
+	   True
+
+
+
+
+	"""
+	diff = ScoreDiff(score1, score2, path)
+	return diff.have_same_articulations(measure, part)
 
 if __name__ == '__main__':
 

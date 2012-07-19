@@ -32,6 +32,12 @@ def test_key(score1, score2, measure=0, part=0):
 	   >>> test_key('bwv66.6.mxl', 'scriabin_opus_8_no5.mxl')
 	   False
 
+	   >>> test_key('scriabin_opus_8_no5.mxl', 'ravel_sonatine_1.mxl', 5)
+	   False
+
+	   >>> test_key('scriabin_opus_2_no1.mxl', 'ravel_sonatine_1.mxl',6 )
+	   False
+
 
 	"""
 
@@ -64,7 +70,13 @@ def test_time_signature(score1, score2, measure = 0, part = 0):
 
 	   >>> test_time_signature('bwv66.6.mxl', 'scriabin_opus_8_no5.mxl')
 	   True
+	
 
+	   >>> test_time_signature('scriabin_opus_2_no1.mxl', 'ravel_sonatine_1.mxl', 4)
+	   False
+
+	   >>> test_time_signature('scriabin_opus_8_no5.mxl', 'ravel_sonatine_1.mxl', 5)
+	   False
 	   
 	"""
 

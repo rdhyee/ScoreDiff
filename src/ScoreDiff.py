@@ -112,7 +112,7 @@ class ScoreDiff:
 		altered2 = measures2[msr].keySignature.alteredPitches
 		altered2 = [x.name for x in altered2]
 
-        for index in range(0, min(len(notes1), len(notes2))):
+        for index in range(0, len(notes1)):
 
         	if(notes1[index].isChord):
 
@@ -126,6 +126,8 @@ class ScoreDiff:
 
 			accidentals1.append(notes1[index].accidental)
             		
+	for index in range(0, len(notes2)):
+		
 		if(notes2[index].isChord):
 
 			for  pitch in notes2[index].pitches:
@@ -137,6 +139,8 @@ class ScoreDiff:
 		elif(not notes2[index].accidental is None and not notes2[index].name in altered2):
 
 			accidentals2.append(notes2[index].accidental)
+
+	
 
 	
 	return accidentals1 == accidentals2
@@ -506,7 +510,7 @@ class ScoreDiff:
         stems1=[]
 	stems2=[]
         
-	for index in range(0, min(len(notes1), len(notes2))):
+	for index in range(0, len(notes1)):
 
 		if(notes1[index].isChord):
 
@@ -520,6 +524,8 @@ class ScoreDiff:
 
 			stems1+=[notes1[index].stemDirection]
 	
+	for index in range(0, len(notes2)):
+			
 		if(notes2[index].isChord):
 
 			for pitch in notes2[index].pitches:

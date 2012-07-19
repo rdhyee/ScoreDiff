@@ -197,6 +197,15 @@ def test_accidentals(score1, score2, measure = 0, part = 0):
 	   >>> test_accidentals('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
 	   True
 
+	   >>> test_accidentals('bwv66.6.mxl', 'scriabin_opus_8_no6.mxl')
+	   True
+
+	   >>> test_accidentals('different_accidentals.mxl', 'scriabin_opus_8_no6.mxl')
+	   False
+
+	   >>> test_accidentals('bwv66.6.mxl', 'scriabin_opus_8_no2.mxl')
+	   True
+
 	  
 	"""
 	diff = ScoreDiff(score1, score2, path)
@@ -254,6 +263,9 @@ def test_spanners(score1, score2, measure = 0, part = 0):
 	   >>> test_spanners('bwv66.6.mxl', 'scriabin_opus_8_no5.mxl')
 	   True
 
+	   >>> test_spanners('bwv66.6.mxl', 'scriabin_opus_8_no9.mxl')
+	   True
+
 	   
 
 	"""
@@ -278,6 +290,11 @@ def test_articulations(score1, score2, measure = 0, part = 0):
 
 	   >>> test_articulations('scriabin_opus_2_no1.mxl', 'scriabin_opus_8_no5.mxl')
 	   True
+
+	   >>> test_articulations('bwv66.6.mxl', 'scriabin_opus_8_no9.mxl')
+	   True
+
+	   
 
 
 

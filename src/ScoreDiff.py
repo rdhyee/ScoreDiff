@@ -162,12 +162,12 @@ class ScoreDiff:
 	if(score_number == 1):
 
 		keys = self.score1.parts[part].flat.getKeySignatures()
-		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
 
 	elif(score_number == 2):
 
 		keys = self.score2.parts[part].flat.getKeySignatures()
-		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
 	
 	current = 0
 
@@ -272,12 +272,12 @@ class ScoreDiff:
 	if(score_number == 1):
 
 		clefs = self.score1.parts[part].flat.getClefs()
-		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
 
 	elif(score_number == 2):
 
 		clefs = self.score2.parts[part].flat.getClefs()
-		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
 
 	current = 0
 
@@ -625,12 +625,12 @@ class ScoreDiff:
 	if(score_number == 1):
 
 		times = self.score1.parts[part].flat.getTimeSignatures()
-		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].measureNumber
 
 	elif(score_number == 2):
 
 		times = self.score2.parts[part].flat.getTimeSignatures()
-		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].measureNumber
 
 	current = 0
 

@@ -93,17 +93,8 @@ class ScoreDiff:
 
 	if(measures1[msr].keySignature == None):
 		
-		keys = self.score1.parts[part].flat.getKeySignatures()
-		current = 0
-		target_measure = measures1[msr].notes[0].measureNumber
-
-		for key in keys:
-
-			if(key.measureNumber > current and key.measureNumber <= target_measure):
-
-				current = key.measureNumber
-
-		altered1 = self.score1.parts[0].measure(current).keySignature.alteredPitches
+		measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 1)
+		altered1 = self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
 		altered1 = [x.name for x in altered1]
 		
 	else:
@@ -113,17 +104,8 @@ class ScoreDiff:
 
 	if(measures2[msr].keySignature == None):
 		
-		keys = self.score2.parts[part].flat.getKeySignatures()
-		current = 0
-		target_measure = measures2[msr].notes[0].measureNumber
-
-		for key in keys:
-
-			if(key.measureNumber > current and key.measureNumber <= target_measure):
-
-				current = key.measureNumber
-
-		altered2 = self.score1.parts[0].measure(current).keySignature.alteredPitches
+		measure_of_last_key_change = self.__get_most_recent_key__(msr, part, 2)
+		altered2 = self.score1.parts[part].measure(measure_of_last_key_change).keySignature.alteredPitches
 		altered2 = [x.name for x in altered2]
 	else:
 		
@@ -158,6 +140,37 @@ class ScoreDiff:
 
 	
 	return accidentals1 == accidentals2
+
+    def __get_most_recent_key__(self, msr=0, part=0, score_number=1):
+        """Gets the measure number of the most recent key change
+	
+	Kwargs:
+	  msr (int): measure number that is used to determine what is considered the most recent key change
+
+	  part (int): the part to examine
+
+	  score_number (int): A score number so the function knows which score to analyze
+
+	"""
+	if(score_number == 1):
+
+		keys = self.score1.parts[part].flat.getKeySignatures()
+		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+
+	elif(score_number == 2):
+
+		keys = self.score2.parts[part].flat.getKeySignatures()
+		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+	
+	current = 0
+
+	for key in keys:
+
+		if(key.measureNumber > current and key.measureNumber <= target_measure):
+
+			current = key.measureNumber
+
+	return current	
 
     def have_same_articulations(self, msr=0, part=0):
         """Checks if the two scores both have the same articulations at the specified measure and for the specified part [#f2]_
@@ -266,7 +279,7 @@ class ScoreDiff:
 
 				current = key.measureNumber
 
-		key_signature1 = self.score1.parts[0].measure(current).keySignature
+		key_signature1 = self.score1.parts[part].measure(current).keySignature
 
 	if(key_signature2 == None):
 
@@ -281,7 +294,7 @@ class ScoreDiff:
 
 				current = key.measureNumber
 
-		key_signature2 = self.score2.parts[0].measure(current).keySignature
+		key_signature2 = self.score2.parts[part].measure(current).keySignature
         
 
 	return key_signature1.sharps == key_signature2.sharps

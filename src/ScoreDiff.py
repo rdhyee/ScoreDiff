@@ -151,6 +151,9 @@ class ScoreDiff:
 
 	  score_number (int): A score number so the function knows which score to analyze
 
+	Returns:
+	  int:	the measure number of the most recent key change
+
 	"""
 	if(score_number == 1):
 

@@ -237,20 +237,59 @@ class ScoreDiff:
         """
 
 	self.__verify_part_and_measure__(msr, part)
-
-        clef1 = self.score1.parts[part].getElementsByClass('Measure')[msr].clef
-        clef2 = self.score2.parts[part].getElementsByClass('Measure')[msr].clef
+	measures1 = self.score1.parts[part].getElementsByClass('Measure')
+	measures2 = self.score2.parts[part].getElementsByClass('Measure')
+        clef1 = measures1[msr].clef
+        clef2 = measures2[msr].clef
 	
-	if(clef1 == None and not clef2 == None or clef2 == None and not clef1 == None):
+	if(clef1 == None): 
 
-		return False
+		current = self.__get_most_recent_clef__(msr, part, 1)
+		clef1 = self.score1.parts[part].measure(current).clef
 
-	if(clef1 == None and clef2 == None):
+	if(clef2 == None):
 
-		return True
+		current = self.__get_most_recent_clef__(msr, part, 2)
+		clef2 = self.score2.parts[part].measure(current).clef
 
         return clef1.sign == clef2.sign
     
+
+    def __get_most_recent_clef__(self, msr=0, part=0, score_number=1):
+        """Gets the measure number of the most recent clef change
+	
+	Kwargs:
+	  msr (int):  the measure number of the most recent clef change
+
+	  part (int): the part to examine
+
+	  score_number (int): A score number so the function knows which score to analyze
+
+	Returns:
+	  int.  The measure number of the most recent clef change
+
+	"""
+	if(score_number == 1):
+
+		clefs = self.score1.parts[part].flat.getClefs()
+		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+
+	elif(score_number == 2):
+
+		clefs = self.score2.parts[part].flat.getClefs()
+		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+
+	current = 0
+
+	for clef in clefs:
+
+		if(clef.measureNumber > current and clef.measureNumber <= target_measure):
+
+			current = clef.measureNumber
+
+	return current
+
+
 
     def have_same_key_signature(self, msr=0, part=0):
         """Checks if the two scores both have the same key signature at the specified measure and for the specified part

@@ -18,8 +18,6 @@ class ScoreDiff:
     """The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
     to the initialization function, so that the user can detect and display certain differences.
 
-    
-
     """
     
     #This ornaments list is used as a reference when comparing ornaments    
@@ -41,16 +39,13 @@ class ScoreDiff:
          localCorpusPath (str)  A path to a corpus if your files are located elsewhere
 
 	 
-        """
-           
-        music21.environment.set('localCorpusPath', localCorpusPath)
+        """        
+	music21.environment.set('localCorpusPath', localCorpusPath)
         self.score1 = base.parse(score1)
        	self.score2 = base.parse(score2)
         self.name1 = score1
         self.name2 = score2
 	
-        
-           
     def display(self, msr=0, part=0):
         """Useful for displaying the differences between the two scores visually
 
@@ -87,15 +82,12 @@ class ScoreDiff:
        
 
         """
-
 	self.__verify_part_and_measure__(msr, part)
 
         measures1 = self.score1.parts[part].getElementsByClass('Measure')
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
 	notes1 = measures1[msr].flat.notes
         notes2 = measures2[msr].flat.notes
-	
-		
 	accidentals1 = []
 	accidentals2 = []
 
@@ -218,7 +210,6 @@ class ScoreDiff:
         Raises:
           ScoreException
        
-
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -256,11 +247,8 @@ class ScoreDiff:
        
 
         """
-        
         self.__verify_part_and_measure__(msr, part)
-        
-        
-	measures1 = self.score1.parts[part].getElementsByClass('Measure')
+        measures1 = self.score1.parts[part].getElementsByClass('Measure')
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
 	key_signature1 = measures1[msr].keySignature
         key_signature2 = measures2[msr].keySignature
@@ -299,10 +287,6 @@ class ScoreDiff:
 	return key_signature1.sharps == key_signature2.sharps
 
 
-
-
-
-
     def have_same_ornaments(self, msr=0, part=0):
         """Checks if the two scores both have the same ornaments at the specified measure and for the specified part
 
@@ -320,7 +304,6 @@ class ScoreDiff:
         Raises:
           ScoreException
        
-
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -385,6 +368,7 @@ class ScoreDiff:
                     
         return True
     
+    
     def have_same_pitches(self, msr=0, part=0):
         """Checks if the two scores both have the same pitches at the specified measure and for the specified part
 	
@@ -405,7 +389,6 @@ class ScoreDiff:
         Raises:
           ScoreException
        
-
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -414,6 +397,7 @@ class ScoreDiff:
         pitches2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches
 
         return pitches1 == pitches2
+
 
     def have_same_pitches_ignore_order(self, msr=0, part=0):
         """Checks if the two scores both have the same pitches at the specified measure and for the specified part
@@ -463,7 +447,6 @@ class ScoreDiff:
         Raises:
           ScoreException
        
-
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -499,6 +482,7 @@ class ScoreDiff:
 
         return spanners1 == spanners2
 
+
     def have_same_stem_directions(self, msr=0, part=0):
         """Checks if the two scores both have the same stem directions at the specified measure and for the specified part
 
@@ -516,7 +500,6 @@ class ScoreDiff:
         Raises:
           ScoreException
        
-
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -556,7 +539,6 @@ class ScoreDiff:
         return stems1 == stems2
       
    	
-
     def have_same_time_signature(self, msr=0, part=0):
         """Checks if the two scores both have the same time signature at the specified measure and for the specified part
 
@@ -574,7 +556,6 @@ class ScoreDiff:
         Raises:
           ScoreException
        
-
         """
 
 	self.__verify_part_and_measure__(msr, part)
@@ -609,7 +590,6 @@ class ScoreDiff:
         Raises:
           ScoreException
 
-
         """
 	self.__verify_part__(part)
 
@@ -639,7 +619,6 @@ class ScoreDiff:
         if (part >= len(self.score2.parts) or part < 0):
 
         	raise ScoreException("part number " + str(part) + " does not exist for " + self.name2)
-
 
 
 class ScoreException(Exception):

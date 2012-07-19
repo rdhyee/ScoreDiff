@@ -271,32 +271,12 @@ class ScoreDiff:
 
 	if(key_signature1 == None):
 
-		keys = self.score1.parts[part].flat.getKeySignatures()
-
-		current = 0
-		target_measure = measures1[msr].notes[0].measureNumber
-
-		for key in keys:
-
-			if(key.measureNumber > current and key.measureNumber <= target_measure):
-
-				current = key.measureNumber
-
+		current = self.__get_most_recent_key__(msr, part , 1)	
 		key_signature1 = self.score1.parts[part].measure(current).keySignature
 
 	if(key_signature2 == None):
-
-		keys = self.score2.parts[part].flat.getKeySignatures()
-
-		current = 0
-		target_measure = measures2[msr].notes[0].measureNumber
-
-		for key in keys():
-
-			if(key.measureNumber > current and key.measureNumber <= target_measure):
-
-				current = key.measureNumber
-
+		
+		current = self.__get_most_recent_key__(msr, part, 2)
 		key_signature2 = self.score2.parts[part].measure(current).keySignature
         
 

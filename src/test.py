@@ -170,7 +170,7 @@ def test_accidentals(score1, score2, measure = 0, part = 0):
 	   False
 
 	   >>> test_accidentals('bwv66.6.mxl', 'different_pitches.mxl')
-	   True
+	   False
 
 	   >>> test_accidentals('bwv66.6.mxl', 'scriabin_opus_2_no1.mxl')
 	   True

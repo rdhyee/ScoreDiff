@@ -545,17 +545,20 @@ class ScoreDiff:
         """
 
 	self.__verify_part_and_measure__(msr, part)
-
-        time_signature1 = self.score1.parts[part].getElementsByClass('Measure')[msr].timeSignature
-        time_signature2 = self.score2.parts[part].getElementsByClass('Measure')[msr].timeSignature
+	measures1 = self.score1.parts[part].getElementsByClass('Measure')
+	measures2 = self.score2.parts[part].getElementsByClass('Measure')
+        time_signature1 = measures1[msr].timeSignature
+        time_signature2 = measures2[msr].timeSignature
 	
-	if(time_signature1 == None and not time_signature2 == None or time_signature2 ==None and not time_signature1 == None):
+	if(time_signature1 == None):
 
-		return False
+		current = self.__get_most_recent_time__(msr, part ,1)
+		time_signature1 = self.score1.parts[part].measure(current).timeSignature
 	
-	if(time_signature1 == None and time_signature2 == None):
+	if(time_signature2 == None):
 		
-		return True
+		current = self.__get_most_recent_time__(msr, part, 2)
+		time_signature2 = self.score2.parts[part].measure(current).timeSignature
 	
 	numerator1 = time_signature1.numerator
         numerator2 = time_signature2.numerator
@@ -563,6 +566,42 @@ class ScoreDiff:
         denominator2 = time_signature2.denominator
     
         return numerator1 == numerator2 and denominator1 == denominator2 
+
+
+    def __get_most_recent_time__(self, msr=0, part=0, score_number=1):
+        """Gets the measure number of the most recent time signature change
+	
+	Kwargs:
+	  msr (int): measure number that is used to determine what is considered the most recent time change
+
+	  part (int): the part to examine
+
+	  score_number (int): A score number so the function knows which score to analyze
+
+	Returns:
+	  int:  the measure number of the most recent time signature change
+
+
+	"""
+	if(score_number == 1):
+
+		times = self.score1.parts[part].flat.getTimeSignatures()
+		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+
+	elif(score_number == 2):
+
+		times = self.score2.parts[part].flat.getTimeSignatures()
+		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+
+	current = 0
+
+	for time in times:
+
+		if(time.measureNumber > current and time.measureNumber <= target_measure):
+
+			current = time.measureNumber
+
+	return current
 
               
     def __verify_part_and_measure__(self, msr, part):

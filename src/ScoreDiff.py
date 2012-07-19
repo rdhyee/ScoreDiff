@@ -204,14 +204,18 @@ class ScoreDiff:
         
 	notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
+	articulations1 = []
+	articulations2 = []
         
-        for index in range(0, min(len(notes1), len(notes2))):
+        for index in range(0, len(notes1)):
             
-            if(notes1[index].articulations != notes2[index].articulations):
-                
-                return False
+        	articulations1 += notes1[index].articulations
+
+	for index in range(0, len(notes2)):
+
+		articulations2 += notes2[index].articulations
             
-        return True
+        return articulations1 == articulations2
 
     def have_same_clef_markings(self, msr=0, part=0):
         """Checks if the two scores both have the same clef markings at the specified measure and for the specified part
@@ -310,64 +314,41 @@ class ScoreDiff:
         
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
-        
-        for index in range(0, min(len(notes1), len(notes2))):
+        ornaments1 = []
+	ornaments2 = []
+
+        for index in range(0, len(notes1)):
             
             e1 = notes1[index].expressions
-            e2 = notes2[index].expressions
-            
-            if(e1 == [] and not e2 == [] or e2 == [] and not e1 == []):
-                
-                return False
-            
-            elif(e1 == [] and e2 == []):
-                
-                continue
-            
-            ornaments1 = []
-            ornaments2 = []
-            
-            inner_index = 0
-            while inner_index < min(len(e1), len(e2)):
-                
-                if(e1[inner_index] in ScoreDiff.ornaments):
-                    
-                    ornaments1.append(e1[inner_index])
-                
-                if(e2[inner_index] in ScoreDiff.ornaments):
-                    
-                    ornaments2.append(e2[inner_index])
-                    
-                inner_index += 1
-                
-            
-            if(max(len(e1), len(e2)) == len(e1)):
-                
-                left_over = e1
-            
-            else:
-                
-                left_over = e2
-            
-            while inner_index < len(left_over):
-                
-                if(left_over[inner_index] in ScoreDiff.ornaments):
-                    
-                    if(left_over == e1):
                         
-                        ornaments1.append(left_over[inner_index])
-                    else:
-                        
-                        ornaments2.append(left_over[inner_index])
+            
+            for inner_index in range(0, len(e1)):
                 
-                inner_index += 1
-                
-            if(ornaments1 != ornaments2):
-                
-                return False
+                classes = e1[inner_index].classes
+		    
+		for third_index in range(0, len(classes)):
+
+			if(classes[third_index] in ScoreDiff.ornaments):
                     
-        return True
-    
+                    		ornaments1.append(classes[third_index])
+                
+	for index in range(0, len(notes2)):
+
+	    e2 = notes2[index].expressions
+	    
+            for inner_index in range(0, len(e2)):
+                
+                classes = e2[inner_index].classes
+
+		for third_index in range(0, len(classes)):
+		    
+			if(classes[third_index] in ScoreDiff.ornaments):
+                        
+                        	ornaments2.append(classes[third_index])
+                
+        
+	
+	return ornaments1 == ornaments2    
     
     def have_same_pitches(self, msr=0, part=0):
         """Checks if the two scores both have the same pitches at the specified measure and for the specified part
@@ -457,7 +438,7 @@ class ScoreDiff:
 	spanners1=[]
 	spanners2=[]
 
-	for index in range(0, min(len(notes1), len(notes2))):
+	for index in range(0, len(notes1)):
 
 		if(notes1[index].isChord):
 
@@ -468,7 +449,10 @@ class ScoreDiff:
 		else:
 
 			spanners1 += notes1[index].getSpannerSites()
+	
 
+	for index in range(0, len(notes2)):
+		
 		if(notes2[index].isChord):
 
 			for pitch in notes2[index].pitches:

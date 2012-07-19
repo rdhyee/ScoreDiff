@@ -10,9 +10,10 @@
 
 import music21.environment
 from music21.corpus import base
-
+import logging
+logging.basicConfig(filename='debug.log', level = logging.DEBUG)
+logging.disable(logging.DEBUG)
 import math
-
 
 class ScoreDiff:
     """The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
@@ -141,8 +142,9 @@ class ScoreDiff:
 			accidentals2.append(notes2[index].accidental)
 
 	
-
 	
+	logging.debug("accidentals1: " +str(accidentals1)) 
+	logging.debug("accidentals2: " +str(accidentals2))
 	return accidentals1 == accidentals2
 
     def __get_most_recent_key__(self, msr=0, part=0, score_number=1):
@@ -176,7 +178,9 @@ class ScoreDiff:
 		if(key.measureNumber > current and key.measureNumber <= target_measure):
 
 			current = key.measureNumber
-
+	
+	
+	logging.debug("most recent key was: "+str(current))
 	return current	
 
     def have_same_articulations(self, msr=0, part=0):
@@ -214,7 +218,11 @@ class ScoreDiff:
 	for index in range(0, len(notes2)):
 
 		articulations2 += notes2[index].articulations
-            
+        
+
+	
+	logging.debug("articulations1: " +str(articulations1))
+	logging.debug("articulations2: "+ str(articulations2))
         return articulations1 == articulations2
 
     def have_same_clef_markings(self, msr=0, part=0):
@@ -252,7 +260,11 @@ class ScoreDiff:
 		current = self.__get_most_recent_clef__(msr, part, 2)
 		clef2 = self.score2.parts[part].measure(current).clef
 
-        return clef1.sign == clef2.sign
+        
+	
+	logging.debug("clef1.sign: " + str(clef1.sign))
+	logging.debug("clef2.sign: " + str(clef2.sign))
+	return clef1.sign == clef2.sign
     
 
     def __get_most_recent_clef__(self, msr=0, part=0, score_number=1):
@@ -286,7 +298,9 @@ class ScoreDiff:
 		if(clef.measureNumber > current and clef.measureNumber <= target_measure):
 
 			current = clef.measureNumber
-
+	
+	
+	logging.debug("most recent clef found: " + str(current))
 	return current
 
 
@@ -326,7 +340,10 @@ class ScoreDiff:
 		current = self.__get_most_recent_key__(msr, part, 2)
 		key_signature2 = self.score2.parts[part].measure(current).keySignature
         
-
+	
+	
+	logging.debug("key signature 1.sharps: "+str(key_signature1.sharps))
+	logging.debug("key signature 2.sharpts: "+str(key_signature2.sharps))
 	return key_signature1.sharps == key_signature2.sharps
 
 
@@ -386,7 +403,8 @@ class ScoreDiff:
                         	ornaments2.append(classes[third_index])
                 
         
-	
+	logging.debug("ornaments1: "+ str(ornaments1))
+	logging.debug("ornaments2: " + str(ornaments2))
 	return ornaments1 == ornaments2    
     
     def have_same_pitches(self, msr=0, part=0):
@@ -415,7 +433,9 @@ class ScoreDiff:
 
         pitches1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches
         pitches2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches
-
+	
+	logging.debug("pitches1: " + str(pitches1))
+	logging.debug("pitches2: " + str(pitches2))
         return pitches1 == pitches2
 
 
@@ -444,7 +464,8 @@ class ScoreDiff:
 
 	pitches1 = sorted(self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches)
         pitches2 = sorted(self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes.pitches)
-
+	logging.debug("pitches1: " + str(pitches1))
+	logging.debug("pitches2: " + str(pitches2))
         return pitches1 == pitches2
 	
 
@@ -502,7 +523,8 @@ class ScoreDiff:
 
 			spanners2 += notes2[index].getSpannerSites()
 	
-
+	logging.debug("spanners1: " + str(spanners1))
+	logging.debug("spanners2: " + str(spanners2))
         return spanners1 == spanners2
 
 
@@ -560,7 +582,9 @@ class ScoreDiff:
 		else:
 
 			stems2+=[notes2[index].stemDirection]
-			
+	
+	logging.debug("stems1: " + str(stems1))
+	logging.debug("stems2: " + str(stems2))
         return stems1 == stems2
       
    	
@@ -603,7 +627,9 @@ class ScoreDiff:
         numerator2 = time_signature2.numerator
         denominator1 = time_signature1.denominator
         denominator2 = time_signature2.denominator
-    
+	
+	logging.debug("time signature1: "+str(numerator1) +"/"+str(denominator1))
+	logging.debug("time signature2: "+str(numerator2) +"/"+str(denominator2))
         return numerator1 == numerator2 and denominator1 == denominator2 
 
 
@@ -639,7 +665,8 @@ class ScoreDiff:
 		if(time.measureNumber > current and time.measureNumber <= target_measure):
 
 			current = time.measureNumber
-
+	
+	logging.debug("most recent time found: "+str(current))
 	return current
 
               

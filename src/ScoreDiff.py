@@ -46,6 +46,7 @@ class ScoreDiff:
        	self.score2 = base.parse(score2)
         self.name1 = score1
         self.name2 = score2
+	
         
            
     def display(self, msr=0, part=0):
@@ -89,12 +90,49 @@ class ScoreDiff:
 
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
-
+	
+	keys1 = self.score1.parts[part].flat.getKeySignatures()
+	keys2 = self.score2.parts[part].flat.getKeySignatures()
+	
 	accidentals1 = []
 	accidentals2 = []
 
-	altered1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
-	altered2 = self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
+	if(self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature == None):
+		
+		key_map = dict([(key.measureNumber, key) for key in keys1])
+		current = 0
+		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+
+		for key, value in key_map.iteritems():
+
+			if(key > current and key <= target_measure):
+
+				current = key
+
+		altered1 = key_map[current].alteredPitches
+		altered1 = [x.name for x in altered1]
+		
+
+	if(self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature == None):
+		
+		key_map = dict([(key.measureNumber, key) for key in keys2])
+		current = 0
+		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+
+		for key, value in key_map.iteritems():
+
+			if(key > current and key <= target_measure):
+
+				current = key
+
+		altered2 = key_map[current].alteredPitches
+		altered2 = [x.name for x in altered2]
+	else:
+		
+		altered1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
+		altered2 = self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature.alteredPitches
+		altered1 = [x.name for x in altered1]
+		altered2 = [x.name for x in altered2]
 
         for index in range(0, min(len(notes1), len(notes2))):
 
@@ -122,11 +160,9 @@ class ScoreDiff:
 
 			accidentals2.append(notes2[index].accidental)
 
-
-
+	
 	return accidentals1 == accidentals2
 
-               
     def have_same_articulations(self, msr=0, part=0):
         """Checks if the two scores both have the same articulations at the specified measure and for the specified part [#f2]_
 	
@@ -220,15 +256,40 @@ class ScoreDiff:
         
         key_signature1 = self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature
         key_signature2 = self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature
+
+	if(key_signature1 == None):
+
+		keys1 = self.score1.parts[part].flat.getKeySignatures()
+
+		key_map = dict([(key.measureNumber, key) for key in keys1])
+		current = 0
+		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+
+		for key, value in key_map.iteritems():
+
+			if(key > current and key <= target_measure):
+
+				current = key
+
+		key_signature1 = key_map[current]
+
+	if(key_signature2 == None):
+
+		keys2 = self.score2.parts[part].flat.getKeySignatures()
+
+		key_map = dict([(key.measureNumber, key) for key in keys2])
+		current = 0
+		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
+
+		for key, value in key_map.iteritems():
+
+			if(key > current and key <= target_measure):
+
+				current = key
+
+		key_signature2 = key_map[current]
         
-	if(key_signature1 == None and not key_signature2 == None or key_signature2==None and not key_signature1==None):
 		
-		return False
-	
-	elif(key_signature1==None and key_signature2==None):
-		
-		return True
-        
 	return key_signature1.sharps == key_signature2.sharps
 
 

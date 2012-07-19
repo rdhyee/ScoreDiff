@@ -52,7 +52,7 @@ class ScoreDiff:
         Kwargs:
           msr (int): A measure number to display
 
-	  part (int): A part number to examine.  If not specified then all parts are displayed
+	  part (int): A part number to examine.  
           
 	  
         """

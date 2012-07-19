@@ -10,7 +10,9 @@
 
 import music21.environment
 from music21.corpus import base
+
 import math
+
 
 class ScoreDiff:
     """The ScoreDiff class uses the music21 toolkit to parse and analyze two scores passed
@@ -27,7 +29,7 @@ class ScoreDiff:
                  'Tremolo', 'Trill', 'Turn', 'WholeStepAppoggiatura', 'WholeStepInvertedAppoggiatura',
                  'WholeStepInvertedMordent', 'WholeStepMordent', 'WholeStepTrill']
 
-    def __init__(self, score1, score2, localCorpusPath='.'):
+    def __init__(self, score1, score2, localCorpusPath = '.'):
         """Initializes a ScoreDiff object.
     
         Args:
@@ -91,25 +93,23 @@ class ScoreDiff:
         notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
 	
-	keys1 = self.score1.parts[part].flat.getKeySignatures()
-	keys2 = self.score2.parts[part].flat.getKeySignatures()
-	
+		
 	accidentals1 = []
 	accidentals2 = []
 
 	if(self.score1.parts[part].getElementsByClass('Measure')[msr].keySignature == None):
 		
-		key_map = dict([(key.measureNumber, key) for key in keys1])
+		keys = self.score1.parts[part].flat.getKeySignatures()
 		current = 0
 		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
 
-		for key, value in key_map.iteritems():
+		for key in keys:
 
-			if(key > current and key <= target_measure):
+			if(key.measureNumber > current and key.measureNumber <= target_measure):
 
-				current = key
+				current = key.measureNumber
 
-		altered1 = key_map[current].alteredPitches
+		altered1 = self.score1.parts[0].measure(current).keySignature.alteredPitches
 		altered1 = [x.name for x in altered1]
 		
 	else:
@@ -119,17 +119,17 @@ class ScoreDiff:
 
 	if(self.score2.parts[part].getElementsByClass('Measure')[msr].keySignature == None):
 		
-		key_map = dict([(key.measureNumber, key) for key in keys2])
+		keys = self.score2.parts[part].flat.getKeySignatures()
 		current = 0
 		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
 
-		for key, value in key_map.iteritems():
+		for key in keys:
 
-			if(key > current and key <= target_measure):
+			if(key.measureNumber > current and key.measureNumber <= target_measure):
 
-				current = key
+				current = key.measureNumber
 
-		altered2 = key_map[current].alteredPitches
+		altered2 = self.score1.parts[0].measure(current).keySignature.alteredPitches
 		altered2 = [x.name for x in altered2]
 	else:
 		
@@ -261,38 +261,39 @@ class ScoreDiff:
 
 	if(key_signature1 == None):
 
-		keys1 = self.score1.parts[part].flat.getKeySignatures()
+		keys = self.score1.parts[part].flat.getKeySignatures()
 
-		key_map = dict([(key.measureNumber, key) for key in keys1])
 		current = 0
 		target_measure = self.score1.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
 
-		for key, value in key_map.iteritems():
+		for key in keys:
 
-			if(key > current and key <= target_measure):
+			if(key.measureNumber > current and key.measureNumber <= target_measure):
 
-				current = key
+				current = key.measureNumber
 
-		key_signature1 = key_map[current]
+		key_signature1 = self.score1.parts[0].measure(current).keySignature
 
 	if(key_signature2 == None):
 
-		keys2 = self.score2.parts[part].flat.getKeySignatures()
+		keys = self.score2.parts[part].flat.getKeySignatures()
 
-		key_map = dict([(key.measureNumber, key) for key in keys2])
 		current = 0
 		target_measure = self.score2.parts[part].getElementsByClass('Measure')[msr].notes[0].measureNumber
 
-		for key, value in key_map.iteritems():
+		for key in keys():
 
-			if(key > current and key <= target_measure):
+			if(key.measureNumber > current and key.measureNumber <= target_measure):
 
-				current = key
+				current = key.measureNumber
 
-		key_signature2 = key_map[current]
+		key_signature2 = self.score2.parts[0].measure(current).keySignature
         
-		
+
 	return key_signature1.sharps == key_signature2.sharps
+
+
+
 
 
 

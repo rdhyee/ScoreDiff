@@ -39,8 +39,7 @@ class ScoreDiff:
         Kwargs:
          localCorpusPath (str)  A path to a corpus if your files are located elsewhere
 
-	 
-        """        
+	"""        
 	music21.environment.set('localCorpusPath', localCorpusPath)
         self.score1 = base.parse(score1)
        	self.score2 = base.parse(score2)
@@ -81,7 +80,6 @@ class ScoreDiff:
         Raises:
           ScoreException
        
-
         """
 	self.__verify_part_and_measure__(msr, part)
 
@@ -140,8 +138,6 @@ class ScoreDiff:
 		elif(not notes2[index].accidental is None and not notes2[index].name in altered2):
 
 			accidentals2.append(notes2[index].accidental)
-
-	
 	
 	logging.debug("accidentals1: " +str(accidentals1)) 
 	logging.debug("accidentals2: " +str(accidentals2))
@@ -178,8 +174,7 @@ class ScoreDiff:
 		if(key.measureNumber > current and key.measureNumber <= target_measure):
 
 			current = key.measureNumber
-	
-	
+		
 	logging.debug("most recent key was: "+str(current))
 	return current	
 
@@ -204,8 +199,7 @@ class ScoreDiff:
         """
 
 	self.__verify_part_and_measure__(msr, part)
-        
-        
+                
 	notes1 = self.score1.parts[part].getElementsByClass('Measure')[msr].flat.notes
         notes2 = self.score2.parts[part].getElementsByClass('Measure')[msr].flat.notes
 	articulations1 = []
@@ -218,9 +212,7 @@ class ScoreDiff:
 	for index in range(0, len(notes2)):
 
 		articulations2 += notes2[index].articulations
-        
-
-	
+        	
 	logging.debug("articulations1: " +str(articulations1))
 	logging.debug("articulations2: "+ str(articulations2))
         return articulations1 == articulations2
@@ -243,7 +235,6 @@ class ScoreDiff:
           ScoreException
        
         """
-
 	self.__verify_part_and_measure__(msr, part)
 	measures1 = self.score1.parts[part].getElementsByClass('Measure')
 	measures2 = self.score2.parts[part].getElementsByClass('Measure')
@@ -259,9 +250,7 @@ class ScoreDiff:
 
 		current = self.__get_most_recent_clef__(msr, part, 2)
 		clef2 = self.score2.parts[part].measure(current).clef
-
-        
-	
+        	
 	logging.debug("clef1.sign: " + str(clef1.sign))
 	logging.debug("clef2.sign: " + str(clef2.sign))
 	return clef1.sign == clef2.sign
@@ -338,9 +327,7 @@ class ScoreDiff:
 	if(key_signature2 == None):
 		
 		current = self.__get_most_recent_key__(msr, part, 2)
-		key_signature2 = self.score2.parts[part].measure(current).keySignature
-        
-	
+		key_signature2 = self.score2.parts[part].measure(current).keySignature        	
 	
 	logging.debug("key signature 1.sharps: "+str(key_signature1.sharps))
 	logging.debug("key signature 2.sharpts: "+str(key_signature2.sharps))
